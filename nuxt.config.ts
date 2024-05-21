@@ -12,6 +12,12 @@ export default defineNuxtConfig({
   ],
   css: ["@/assets/styles/main.scss"],
   plugins: ["@/plugins/maska.ts", "@/plugins/apollo.ts"],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
   vite: {
     vue: {
       script: {
@@ -45,4 +51,7 @@ export default defineNuxtConfig({
       },
     ],
   },
+  colorMode: {
+    preference: 'light'
+  }
 });
