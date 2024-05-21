@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { defineEmits } from 'vue'
+
 const face = ['ИП', 'ЮР', 'Организация']
 const selectedFace = defineModel()
 const emit = defineEmits(['update:modelValue'])
