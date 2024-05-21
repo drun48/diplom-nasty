@@ -1,11 +1,10 @@
 <script setup lang="ts">
-    
+    import Calendar from '../components/modules/Calendar.vue'
 </script>
 
 <template>
   <div>
-    <p>dasdasd</p>
-    <Icon name="ant-design:apple-filled"></Icon>
+    <Calendar/>
   </div>
 </template>
 
