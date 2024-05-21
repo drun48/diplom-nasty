@@ -2,22 +2,23 @@
 import { ref } from 'vue';
 import UserTable from '../components/modules/UserTable.vue'
 import { useAppStore } from '@/store/app.ts'
+import SelectedCategory from '../components/modules/SelectedCategory.vue'
 
 const appStore = useAppStore()
 appStore.currentTitle = 'Клиенты'
 
-const face = ['ИП', 'ЮР']
-const selectedFace = ref(face[0])
+const selectedFace = ref('')
 
 const name = ref('')
 const inn = ref('')
+
 </script>
 
 <template>
     <section>
         <div class="flex justify-between items-center">
             <div class="flex gap-4">
-                <UInputMenu v-model="selectedFace" :options="face" />
+                <SelectedCategory v-model="selectedFace" />
                 <UInput icon="i-heroicons-magnifying-glass-20-solid" size="sm" color="white" :trailing="false"
                     placeholder="ФИО" v-model="name" />
                 <UInput icon="i-heroicons-magnifying-glass-20-solid" size="sm" color="white" :trailing="false"
