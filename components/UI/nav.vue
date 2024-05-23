@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import diagrm_ganta from '@/assets/img/diagrm_ganta.svg'
 
 const route = useRoute()
-const navigation: Array<{ icon: string, href: string }> = [
+const navigation: Array<{ icon?: string, href: string, image?: string }> = [
     {
         icon: 'mdi:account-eye',
         href: '/users',
@@ -10,6 +10,10 @@ const navigation: Array<{ icon: string, href: string }> = [
     {
         icon: 'solar:calendar-bold',
         href: '/',
+    },
+    {
+        href: '/diagram',
+        image: diagrm_ganta
     }
 ]
 
@@ -19,24 +23,30 @@ const navigation: Array<{ icon: string, href: string }> = [
     <div class="flex flex-col items-center absolute gap-6 top-6 left-6">
         <Icon name="iconamoon:3d" size="40"></Icon>
         <ul class="flex flex-col items-center gap-4">
-            <li v-for="(item, key) in navigation" :key="key"
-                :class="route.path === item.href ? 'active' : ''"
+            <li v-for="(item, key) in navigation" :key="key" :class="route.path === item.href ? 'active' : ''"
                 class="p-2">
                 <nuxt-link :to="item.href">
-                    <Icon size="30" :name="item.icon"></Icon>
+                    <Icon v-if="item.icon" size="30" :name="item.icon"></Icon>
+                    <img v-if="item.image" :src="item.image" />
                 </nuxt-link>
             </li>
         </ul>
     </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .active {
     background: rgba(180, 192, 197, 1);
     border-radius: 8px;
-    svg *{
+
+    svg * {
         fill: #FFF;
     }
+
     transition: all 0.3s;
+}
+
+img {
+    width: 30px;
 }
 </style>

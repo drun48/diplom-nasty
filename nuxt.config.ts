@@ -7,11 +7,15 @@ export default defineNuxtConfig({
     "@nuxtjs/apollo",
     "@nuxt/ui",
     "@nuxtjs/tailwindcss",
-    '@nuxtjs/color-mode',
+    "@nuxtjs/color-mode",
     "nuxt-icon",
   ],
   css: ["@/assets/styles/main.scss"],
-  plugins: ["@/plugins/maska.ts", "@/plugins/apollo.ts"],
+  plugins: [
+    "@/plugins/maska.ts",
+    "@/plugins/apollo.ts",
+    "@/plugins/diagrama_grant.ts",
+  ],
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -46,12 +50,12 @@ export default defineNuxtConfig({
   icon: {
     customCollections: [
       {
-        prefix: 'my-icon',
-        dir: './assets/icon'
+        prefix: "my-icon",
+        dir: "./assets/icon",
       },
     ],
   },
   colorMode: {
-    preference: 'light'
-  }
+    preference: "light",
+  },
 });
