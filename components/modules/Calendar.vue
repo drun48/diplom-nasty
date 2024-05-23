@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { getWeekTitle, formatDayMounth, MounthInit } from '../../utils/utilDate'
+import rangeDate from '../UI/rangeDate.vue'
+
 
 const title: Array<string> = getWeekTitle()
 
@@ -40,15 +42,7 @@ const sectors = computed(() => {
 
 <template>
     <div class="flex flex-col gap-4">
-        <div class="flex gap-2 align-center">
-            <button @click="changeMounth(-1)">
-                <Icon name="i-solar-alt-arrow-left-line-duotone"></Icon>
-            </button>
-            <p>{{ strCurrentMounth }}</p>
-            <button @click="changeMounth(1)">
-                <Icon name="i-solar-alt-arrow-right-line-duotone"></Icon>
-            </button>
-        </div>
+        <rangeDate :label="strCurrentMounth" @changeDate="changeMounth"></rangeDate>
         <div>
             <div class="grid grid-cols-7 bg-white">
                 <div v-for="item in title" :key="item" class="flex justify-center ">

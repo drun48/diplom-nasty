@@ -1,3 +1,5 @@
+import * as dayjs from 'dayjs'
+
 const WeekTitle = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"];
 
 const MounthDeclination = [
@@ -59,4 +61,13 @@ export function MounthInit(month: number, year: number) {
     count,
     dateFirst,
   };
+}
+
+export function getNowDay() {
+  const date = new Date();
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
+}
+
+export function formatDateToGranta(date: Date) {
+  return dayjs.default(date).format('YYYY-MM-DD HH:mm') 
 }
