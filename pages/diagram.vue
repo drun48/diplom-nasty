@@ -1,21 +1,25 @@
 <script setup lang="ts">
 import { ref } from "vue"
+import * as dayjs from 'dayjs'
+import 'dayjs/locale/ru'
+dayjs.locale('ru')
 
 const row1BarList = ref([
     {
-        myBeginDate: "2021-07-13 13:00",
-        myEndDate: "2021-07-13 19:00",
+        myBeginDate: "2021-07-12 13:00",
+        myEndDate: "2021-07-12 19:00",
         ganttBarConfig: {
             // each bar must have a nested ganttBarConfig object ...
             id: "unique-id-1", // ... and a unique "id" property
-            label: "Lorem ipsum dolor"
+            label: "Lorem ipsum dolor",
+            hasHandles: true,
         }
     }
 ])
 const row2BarList = ref([
     {
-        myBeginDate: "2021-07-13 00:00",
-        myEndDate: "2021-07-14 02:00",
+        myBeginDate: "2021-07-12 00:00",
+        myEndDate: "2021-07-12 03:00",
         ganttBarConfig: {
             id: "another-unique-id-2",
             hasHandles: true,
@@ -33,8 +37,8 @@ const row2BarList = ref([
 </script>
 
 <template>
-    <g-gantt-chart chart-start="2021-07-12 12:00" chart-end="2021-07-14 12:00" precision="hour" bar-start="myBeginDate"
-        bar-end="myEndDate">
+    <g-gantt-chart chart-start="2021-07-12 00:00" chart-end="2021-07-12 23:59" precision="hour" bar-start="myBeginDate"
+        bar-end="myEndDate" >
         <g-gantt-row label="My row 1" :bars="row1BarList" />
         <g-gantt-row label="My row 2" :bars="row2BarList" />
     </g-gantt-chart>

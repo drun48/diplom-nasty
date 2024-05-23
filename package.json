@@ -12,6 +12,7 @@
   "dependencies": {
     "@infectoone/vue-ganttastic": "^2.3.2",
     "@nuxt/ui": "^2.15.2",
+    "dayjs": "^1.11.11",
     "maska": "^2.1.11",
     "nuxt": "^3.11.2",
     "nuxt-icon": "^0.6.10",
