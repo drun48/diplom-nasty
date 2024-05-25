@@ -21,7 +21,11 @@ watch(props, () => {
 
 <template>
     <USelectMenu class="w-full" v-model="selectedCitizen" multiple :options="citizen" value-attribute="id"
-        option-attribute="name" />
+        option-attribute="name" searchable searchable-placeholder="Ввидите имя">
+        <template #label>
+            <span>Выбрано: {{ selectedCitizen.length }}</span>
+        </template>
+    </USelectMenu>
 </template>
 
 

@@ -36,6 +36,12 @@ const format = (date: Array<Date>) => {
 
 <template>
     <VueDatePicker v-model="date" @update:model-value="updateDateRange" range :format-locale="ru" :format="format">
+        <template #action-row="{ closePicker, selectDate }">
+            <div class="flex gap-4 justify-end w-full">
+                <button @click="closePicker">Отмена</button>
+                <button @click="selectDate">Выбирите дату</button>
+            </div>
+        </template>
     </VueDatePicker>
 </template>
 
