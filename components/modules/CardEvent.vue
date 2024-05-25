@@ -4,7 +4,8 @@ import CardCalendar from '~/components/modules/CardCalendar.vue'
 const props = defineProps<{
     title: string,
     discription: string,
-    date: Date
+    dateStart: Date,
+    dateEnd: Date
 }>()
 
 const colors = {
@@ -16,7 +17,7 @@ const colors = {
 </script>
 
 <template>
-    <CardCalendar :title="title" :discription="discription" :date="date" :statusColor="colors" />
+    <CardCalendar v-bind="props" :statusColor="colors" />
 </template>
 
 <style lang="scss" scoped></style>

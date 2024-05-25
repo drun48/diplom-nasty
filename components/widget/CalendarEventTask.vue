@@ -10,31 +10,34 @@ const dateYesterday = new Date(new Date().setDate(dateNow.getDate() - 1))
 const dateNowNextHours = new Date(new Date().setHours(dateNow.getHours() + 1))
 const dateNowNextDay = new Date(new Date().setDate(dateNow.getDate() + 1))
 
-console.log(dateNowNextHours, dateNow)
 const listTaskEvent = [
     {
         day: formatDateRussianOnlyDate(dateNow),
         cards: [
             {
-                date: getDateTimeMinute(dateNow),
+                dateStart: getDateTimeMinute(dateNow),
+                dateEnd: getDateTimeMinute(dateNow),
                 title: 'Название события сегодня прошло',
                 discription: 'Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание',
                 type: 'Event'
             },
             {
-                date: getDateTimeMinute(dateNow),
+                dateStart: getDateTimeMinute(dateNow),
+                dateEnd: getDateTimeMinute(dateNow),
                 title: 'Название задачи сегодня прошло',
                 discription: 'Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание',
                 type: 'Task'
             },
             {
-                date: getDateTimeMinute(dateNowNextHours),
+                dateStart: getDateTimeMinute(dateNowNextHours),
+                dateEnd: getDateTimeMinute(dateNowNextHours),
                 title: 'Название события следующий час',
                 discription: 'Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание',
                 type: 'Event'
             },
             {
-                date: getDateTimeMinute(dateNowNextHours),
+                dateStart: getDateTimeMinute(dateNowNextHours),
+                dateEnd: getDateTimeMinute(dateNowNextHours),
                 title: 'Название задачи следующий час',
                 discription: 'Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание',
                 type: 'Task'
@@ -45,13 +48,15 @@ const listTaskEvent = [
         day: formatDateRussianOnlyDate(dateYesterday),
         cards: [
             {
-                date: getDateTimeMinute(dateYesterday),
+                dateStart: getDateTimeMinute(dateYesterday),
+                dateEnd: getDateTimeMinute(dateYesterday),
                 title: 'Название события вчера',
                 discription: 'Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание',
                 type: 'Event'
             },
             {
-                date: getDateTimeMinute(dateYesterday),
+                dateStart: getDateTimeMinute(dateYesterday),
+                dateEnd: getDateTimeMinute(dateYesterday),
                 title: 'Название задачи вчера',
                 discription: 'Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание',
                 type: 'Task'
@@ -62,13 +67,15 @@ const listTaskEvent = [
         day: formatDateRussianOnlyDate(dateNowNextDay),
         cards: [
             {
-                date: getDateTimeMinute(dateNowNextDay),
+                dateStart: getDateTimeMinute(dateNowNextDay),
+                dateEnd: getDateTimeMinute(dateNowNextDay),
                 title: 'Название события завтра',
                 discription: 'Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание',
                 type: 'Event'
             },
             {
-                date: getDateTimeMinute(dateNowNextDay),
+                dateStart: getDateTimeMinute(dateNowNextDay),
+                dateEnd: getDateTimeMinute(dateNowNextDay),
                 title: 'Название задачи завтра',
                 discription: 'Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание',
                 type: 'Task'
