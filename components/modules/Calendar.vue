@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getWeekTitle, formatDayMounth, MounthInit } from '../../utils/utilDate'
+import { getWeekTitle, formatDayMounth, MounthInit, formatDateRussianOnlyDate } from '../../utils/utilDate'
 import rangeDate from '../UI/rangeDate.vue'
 
 
@@ -34,7 +34,10 @@ const sectors = computed(() => {
     return new Array(sectorCount.value).fill(null).map((item, index) => {
         const day = structuredClone(firsDateCalendar.value)
         day.setDate(day.getDate() + index)
-        return formatDayMounth(day)
+        return {
+            label: formatDayMounth(day),
+            slotName: formatDateRussianOnlyDate(day)
+        }
     })
 })
 
@@ -51,12 +54,12 @@ const sectors = computed(() => {
             </div>
             <div class="grid grid-cols-7">
                 <div v-for="(item, index) in sectors" :key="index" class="sector">
-                    <div class="flex px-4 bg-gray-200">
-                        <p style="color:rgba(144, 156, 162, 1);">{{ item }}</p>
+                    <div class="flex px-4 bg-gray-200 sector__title">
+                        <p style="color:rgba(144, 156, 162, 1);">{{ item.label }}</p>
                     </div>
-                    <div class="flex">
+                    <div class="flex container-content">
                         <div class="min-h-48 aspect-square sector__content">
-                            <slot />
+                            <slot :name="item.slotName" />
                         </div>
                         <hr v-if="(index + 1) % 7 > 0" />
                     </div>
@@ -72,6 +75,18 @@ const sectors = computed(() => {
     border-top: 1px solid #E0E0E0;
     border-bottom: 1px solid #E0E0E0;
     flex: 1 auto;
+}
+
+.container-content {
+    height: calc(100% - 25px);
+}
+
+.sector__content>* {
+    width: 100%;
+}
+
+.sector__title {
+    height: 25px;
 }
 
 .sector hr {

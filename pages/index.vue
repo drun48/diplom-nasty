@@ -1,13 +1,11 @@
 <script setup lang="ts">
-    import Calendar from '../components/modules/Calendar.vue'
+import CalendarEventTask from '~/components/widget/CalendarEventTask.vue'
 </script>
 
 <template>
   <div>
-    <Calendar/>
+    <CalendarEventTask />
   </div>
 </template>
 
-<style>
-
-</style>
+<style></style>

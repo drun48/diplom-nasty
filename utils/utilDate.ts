@@ -1,4 +1,4 @@
-import * as dayjs from 'dayjs'
+import * as dayjs from "dayjs";
 
 const WeekTitle = ["ПН", "ВТ", "СР", "ЧТ", "ПТ", "СБ", "ВС"];
 
@@ -68,10 +68,29 @@ export function getNowDay() {
   return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
 }
 
-export function formatDateToGranta(date: Date) {
-  return dayjs.default(date).format('YYYY-MM-DD HH:mm') 
+export function getDateTimeMinute(date: Date) {
+  return new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
+    date.getHours(),
+    date.getMinutes(),
+    0
+  );
 }
 
-export function formatDateRussian(date: Date){
-  return dayjs.default(date).format('DD.MM.YYYY HH:mm')
+export function getNowDayTimeMinute() {
+  return getDateTimeMinute(new Date());
+}
+
+export function formatDateToGranta(date: Date) {
+  return dayjs.default(date).format("YYYY-MM-DD HH:mm");
+}
+
+export function formatDateRussian(date: Date) {
+  return dayjs.default(date).format("DD.MM.YYYY HH:mm");
+}
+
+export function formatDateRussianOnlyDate(date: Date) {
+  return dayjs.default(date).format("DD.MM.YYYY");
 }

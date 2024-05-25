@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import BackBtn from '../components/modules/BackBtn.vue'
-import DatePickerTimeRange from '../components/UI/DatePickerTimeRange.vue'
+import DatePickerTimeRangeDay from '../components/UI/DatePickerTimeRangeDay.vue'
 import SelectedCitizenId from '~/components/widget/SelectedCitizenId.vue'
 
 const form = reactive({
@@ -25,7 +25,7 @@ const form = reactive({
                     v-model="form.description" />
             </div>
             <div class="flex w-full">
-                <DatePickerTimeRange class="calendar" v-model="form.date" />
+                <DatePickerTimeRangeDay class="calendar" v-model="form.date" />
             </div>
             <div class="flex w-full">
                 <SelectedCitizenId class="w-full" v-model="form.selectedUser" />
