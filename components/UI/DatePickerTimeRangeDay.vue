@@ -14,14 +14,22 @@ const props = defineProps<{
 }>()
 const emit = defineEmits(['update:modelValue'])
 
-const date = ref<[Date?, Date?]>([props.modelValue.start, props.modelValue.start])
+const date = ref<[Date?, Date?]>([props.modelValue.start, props.modelValue.end])
 
 watch(props, () => {
-    if (date.value[0] !== props.modelValue.start || date.value[1] !== props.modelValue.end)
-        date.value = [props.modelValue.start, props.modelValue.start]
+    if (!date.value) {
+        if (props.modelValue && props.modelValue.start && props.modelValue.end)
+            date.value = [props.modelValue.start, props.modelValue.end]
+    } else if (date.value[0] !== props.modelValue.start || date.value[1] !== props.modelValue.end) {
+        date.value = [props.modelValue.start, props.modelValue.end]
+    }
 })
 
 const updateDateRange = () => {
+    if (!date.value) {
+        emit('update:modelValue', {})
+        return
+    }
     emit('update:modelValue', {
         start: date.value[0],
         end: date.value[1]
@@ -35,7 +43,8 @@ const format = (date: Array<Date>) => {
 </script>
 
 <template>
-    <VueDatePicker v-model="date" @update:model-value="updateDateRange" range :format-locale="ru" :format="format" max-range="1" >
+    <VueDatePicker v-model="date" @update:model-value="updateDateRange" range :format-locale="ru" :format="format"
+        max-range="1">
         <template #action-row="{ closePicker, selectDate }">
             <div class="flex gap-4 justify-end w-full">
                 <UButton @click="closePicker">Отмена</UButton>
