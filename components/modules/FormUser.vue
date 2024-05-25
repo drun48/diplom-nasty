@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
 import type { User } from '~/types/user';
-import SelectedCategory from '../components/modules/SelectedCategory.vue'
+import SelectedCategory from '~/components/modules/SelectedCategory.vue'
 import { isEqual } from '~/utils/isEqual'
 import { mapped } from '~/utils/mapped'
 
@@ -24,14 +24,14 @@ const defaultObj = {
 const form = ref<User>(defaultObj)
 
 
-const mappedEvent = () => {
+const mappedUser = () => {
     form.value = mapped(form.value, props.modelValue, defaultObj)
 }
-mappedEvent()
+mappedUser()
 
 watch(props, () => {
     if (!isEqual(props.modelValue, form.value)) {
-        mappedEvent()
+        mappedUser()
     }
 })
 

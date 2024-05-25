@@ -8,7 +8,7 @@ import FromUser from '~/components/modules/FormUser.vue'
 const appStore = useAppStore()
 appStore.currentTitle = 'Добавить клиента'
 
-const form = ref<User>({})
+const form = ref<User>()
 </script>
 
 <template>

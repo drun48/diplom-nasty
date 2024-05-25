@@ -14,7 +14,10 @@ const props = defineProps<{
 }>()
 const emit = defineEmits(['update:modelValue'])
 
-const date = ref<[Date?, Date?]>([props.modelValue.start, props.modelValue.end])
+const date = ref<[Date?, Date?]>([])
+if (props.modelValue) {
+    date.value = [props.modelValue.start, props.modelValue.end]
+}
 
 watch(props, () => {
     if (!date.value) {

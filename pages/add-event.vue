@@ -6,7 +6,7 @@ import FormEvent from '~/components/modules/FormEvent.vue'
 const appStore = useAppStore()
 appStore.currentTitle = 'Добавить мероприятие'
 
-const form = ref({})
+const form = ref()
 </script>
 
 <template>
