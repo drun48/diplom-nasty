@@ -17,15 +17,17 @@ const props = defineProps<{
 
 const emit = defineEmits(['update:modelValue'])
 
-const form = ref({
+const defaultObj = {
     name: '',
     description: '',
     selectedUser: [],
     date: {}
-})
+}
+
+const form = ref(defaultObj)
 
 const mappedEvent = () => {
-    form.value = mapped(form.value, props.modelValue, { name: '', description: '', selectedUser: [], date: {} })
+    form.value = mapped(form.value, props.modelValue, defaultObj)
 }
 mappedEvent()
 
