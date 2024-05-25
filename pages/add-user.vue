@@ -3,6 +3,9 @@ import { reactive } from 'vue';
 import type { User } from '../types/user';
 import SelectedCategory from '../components/modules/SelectedCategory.vue'
 import BackBtn from '../components/modules/BackBtn.vue'
+import { useAppStore } from '@/store/app.ts'
+const appStore = useAppStore()
+appStore.currentTitle = 'Добавить клиента'
 
 const form = reactive<User>({
     inn: '',

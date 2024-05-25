@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue"
 import DiagramaGranta from '@/components/modules/DiagramaGranta.vue'
-
+import { useAppStore } from '@/store/app.ts'
+const appStore = useAppStore()
+appStore.currentTitle = 'Диаграмма Ганта'
 </script>
 
 <template>

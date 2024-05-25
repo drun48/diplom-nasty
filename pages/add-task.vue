@@ -3,6 +3,9 @@ import { ref } from 'vue'
 import BackBtn from '../components/modules/BackBtn.vue'
 import DatePickerTimeRangeDay from '../components/UI/DatePickerTimeRangeDay.vue'
 import SelectedApplications from '~/components/widget/SelectedApplications.vue'
+import { useAppStore } from '@/store/app.ts'
+const appStore = useAppStore()
+appStore.currentTitle = 'Добавить задачу'
 
 const form = reactive({
     name: '',

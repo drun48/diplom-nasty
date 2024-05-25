@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import CalendarEventTask from '~/components/widget/CalendarEventTask.vue'
+import { useAppStore } from '@/store/app.ts'
+const appStore = useAppStore()
+appStore.currentTitle = 'Календарь'
 </script>
 
 <template>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import UserTable from '../components/modules/UserTable.vue'
-import { useAppStore } from '@/store/app.ts'
 import SelectedCategory from '../components/modules/SelectedCategory.vue'
 
+import { useAppStore } from '@/store/app.ts'
 const appStore = useAppStore()
 appStore.currentTitle = 'Клиенты'
 
