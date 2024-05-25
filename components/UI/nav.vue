@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import diagrm_ganta from '@/assets/img/diagrm_ganta.svg'
+import diagrm_ganta from '@/assets/img/diagrm_ganta.svg?raw'
 
 const route = useRoute()
 const navigation: Array<{ icon?: string, href: string, image?: string }> = [
@@ -27,7 +27,8 @@ const navigation: Array<{ icon?: string, href: string, image?: string }> = [
                 class="p-2">
                 <nuxt-link :to="item.href">
                     <Icon v-if="item.icon" size="30" :name="item.icon"></Icon>
-                    <img v-if="item.image" :src="item.image" />
+                    <!-- <img v-if="item.image" :src="item.image" /> -->
+                    <div v-if="item.image" v-html="item.image" class="my-icon" />
                 </nuxt-link>
             </li>
         </ul>
@@ -46,7 +47,12 @@ const navigation: Array<{ icon?: string, href: string, image?: string }> = [
     transition: all 0.3s;
 }
 
-img {
+.my-icon > * {
     width: 30px;
+    height: auto;
+}
+
+.active .my-icon *{
+    fill: #FFF;
 }
 </style>
