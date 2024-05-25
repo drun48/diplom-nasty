@@ -6,7 +6,7 @@ import { isEqual } from '~/utils/isEqual'
 import { mapped } from '~/utils/mapped'
 
 const props = defineProps<{
-    modelValue: Partial<User>
+    modelValue?: Partial<User>
 }>()
 
 const emit = defineEmits(['update:modelValue'])
@@ -25,7 +25,8 @@ const form = ref<User>(defaultObj)
 
 
 const mappedUser = () => {
-    form.value = mapped(form.value, props.modelValue, defaultObj)
+    if (props.modelValue)
+        form.value = mapped(form.value, props.modelValue, defaultObj)
 }
 mappedUser()
 

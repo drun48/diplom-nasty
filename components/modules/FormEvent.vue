@@ -6,7 +6,7 @@ import { isEqual } from '~/utils/isEqual'
 import { mapped } from '~/utils/mapped'
 
 const props = defineProps<{
-    modelValue: {
+    modelValue?: {
         name?: string,
         description?: string,
         selectedUser?: string,
@@ -26,7 +26,8 @@ const defaultObj = {
 const form = ref(defaultObj)
 
 const mappedEvent = () => {
-    form.value = mapped(form.value, props.modelValue, defaultObj)
+    if(props.modelValue)
+        form.value = mapped(form.value, props.modelValue, defaultObj)
 }
 mappedEvent()
 
