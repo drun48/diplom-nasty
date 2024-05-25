@@ -71,3 +71,7 @@ export function getNowDay() {
 export function formatDateToGranta(date: Date) {
   return dayjs.default(date).format('YYYY-MM-DD HH:mm') 
 }
+
+export function formatDateRussian(date: Date){
+  return dayjs.default(date).format('DD.MM.YYYY HH:mm')
+}
