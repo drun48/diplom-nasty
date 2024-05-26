@@ -5,7 +5,7 @@ import { useUserStore } from '~/store/user'
 const props = defineProps<{
     modelValue?: Array<number>
 }>()
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'changeSelected'])
 
 const citizen = computed(() => {
     return [
@@ -34,7 +34,7 @@ watch(selected, () => {
 
 <template>
     <USelectMenu class="w-full" v-model="selected" multiple :options="citizen" value-attribute="id"
-        option-attribute="id" searchable searchable-placeholder="Ввидите">
+        option-attribute="id" searchable searchable-placeholder="Ввидите" @change="emit('changeSelected')">
         <template #label>
             <span>Выбрано мер поддержки: {{ selected.length }}</span>
         </template>

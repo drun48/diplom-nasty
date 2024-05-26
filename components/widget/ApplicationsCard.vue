@@ -12,12 +12,16 @@ const props = defineProps<{
     support_measures: Array<number>
 }>()
 
-const card = computed(() => {
+const card = ref({ ...props })
+
+watch(props, () => {
+    card.value = { ...props }
+})
+
+const cardConfig = computed(() => {
     return [{
-        id: props.id,
+        ...card.value,
         slot: 'card-application',
-        citizen: props.citizen,
-        comments: props.comments,
     }]
 })
 
@@ -43,12 +47,16 @@ const changeStatus = (status: number) => {
             break
     }
 }
+
+const changeSelectedSupport = () => {
+    console.log(card.value.support_measures)
+}
 </script>
 
 <template>
-    <UAccordion :items="card" :ui="{ wrapper: 'flex flex-col w-full' }">
+    <UAccordion :items="cardConfig" :ui="{ wrapper: 'flex flex-col w-full' }">
 
-        <template #card-application="{ item }">
+        <template #card-application>
             <div class="flex flex-col p-4 rounded gap-4 applications">
 
                 <div class="flex">
@@ -56,15 +64,15 @@ const changeStatus = (status: number) => {
                     <div class="flex flex-auto gap-4">
                         <div class="flex flex-col gap-2">
                             <p>ФИО Заявителя</p>
-                            <p>{{ item.citizen.name }}</p>
+                            <p>{{ card.citizen.name }}</p>
                         </div>
                         <div class="flex flex-col gap-2">
                             <p>Телефон Заявителя</p>
-                            <p>{{ item.citizen.phone }}</p>
+                            <p>{{ card.citizen.phone }}</p>
                         </div>
                     </div>
-                    
-                    
+
+
                     <div class="flex gap-2 change-status">
                         <p>{{ cardStatus.label }}</p>
                         <UButton v-if="cardStatus.status < 2" @click="changeStatus(cardStatus.status)">
@@ -72,9 +80,10 @@ const changeStatus = (status: number) => {
                         </UButton>
                     </div>
                 </div>
-                <SelectedSupportMeasures v-model="props.support_measures" />
 
-                <CommentApplications @sendComment="sendComment" :comments="item.comments" />
+                <SelectedSupportMeasures v-model="card.support_measures" @changeSelected="changeSelectedSupport"/>
+
+                <CommentApplications @sendComment="sendComment" :comments="card.comments" />
             </div>
         </template>
 

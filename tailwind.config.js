@@ -8,6 +8,8 @@ module.exports = {
     "./app.vue",
     "./error.vue",
   ],
+  darkMode: false,
+  mode: 'jit',
   theme: {
     extend: {},
   },
