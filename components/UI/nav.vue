@@ -14,6 +14,10 @@ const navigation: Array<{ icon?: string, href: string, image?: string }> = [
     {
         href: '/diagram',
         image: diagrm_ganta
+    },
+    {
+        href: '/applications',
+        icon: 'i-material-symbols-approval-delegation-outline'
     }
 ]
 

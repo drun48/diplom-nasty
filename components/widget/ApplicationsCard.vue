@@ -83,7 +83,7 @@ const changeStatus = (status: number) => {
 
                 <div class="flex flex-auto">
                     <div>
-                        <p>Заявка под номером: {{ item.id }}</p>
+                        <p>Заявка №: {{ item.id }}</p>
                     </div>
                 </div>
 
