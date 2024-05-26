@@ -8,7 +8,7 @@ const list = ref([
     {
         id: 1,
         citizen: {
-            name: 'Иванов Иван Иваныч',
+            name: 'Иванов1 Иван Иваныч',
             phone: '89006008913'
         },
         comments: ['Текст сообщение', 'Текст сообщение', 'Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание'],
@@ -18,22 +18,22 @@ const list = ref([
     {
         id: 2,
         citizen: {
-            name: 'Иванов Иван Иваныч',
+            name: 'Иванов2 Иван Иваныч',
             phone: '89006008913'
         },
         comments: ['Текст сообщение', 'Текст сообщение', 'Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание'],
-        support_measures: [1, 2],
+        support_measures: [1, 2, 3],
         request_date: new Date(),
         confirm_date: new Date()
     },
     {
         id: 3,
         citizen: {
-            name: 'Иванов Иван Иваныч',
+            name: 'Иванов3 Иван Иваныч',
             phone: '89006008913'
         },
         comments: ['Текст сообщение', 'Текст сообщение', 'Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание'],
-        support_measures: [1, 2],
+        support_measures: [1],
         request_date: new Date(),
         confirm_date: new Date(),
         end_date: new Date()
@@ -41,8 +41,10 @@ const list = ref([
 ])
 
 const filter = ref(1)
+const key = ref(Math.random())
 
 const filterList = computed(() => {
+    key.value = Math.random()
     if (filter.value === 0) return list.value
     return list.value.filter(filterStatus) ?? []
 })
@@ -53,6 +55,7 @@ const filterStatus = (applications: any): boolean => {
     if (filter.value === 3) return Boolean(applications.end_date)
     return false
 }
+
 </script>
 
 <template>
@@ -65,7 +68,7 @@ const filterStatus = (applications: any): boolean => {
             </UButton>
             <UButton :class="`${filter === 0 ? 'active' : ''} btn-filter`" @click="filter = 0">Все заявки</UButton>
         </div>
-        <div class="flex flex-col">
+        <div class="flex flex-col" :key="key">
             <ApplicationsCard v-for="(item, key) in filterList" :key="key" v-bind="item" />
         </div>
     </div>
