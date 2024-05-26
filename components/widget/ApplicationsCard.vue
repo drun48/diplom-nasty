@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import CommentApplications from '~/components/modules/CommentApplications.vue'
+import SelectedSupportMeasures from '~/components/widget/SelectedSupportMeasures.vue'
 
 const props = defineProps<{
     id: number,
@@ -8,7 +9,7 @@ const props = defineProps<{
     request_date: Date,
     confirm_date?: Date,
     end_date?: Date,
-    support_measures: Array<any>
+    support_measures: Array<number>
 }>()
 
 const card = computed(() => {
@@ -62,7 +63,8 @@ const changeStatus = (status: number) => {
                             <p>{{ item.citizen.phone }}</p>
                         </div>
                     </div>
-
+                    
+                    
                     <div class="flex gap-2 change-status">
                         <p>{{ cardStatus.label }}</p>
                         <UButton v-if="cardStatus.status < 2" @click="changeStatus(cardStatus.status)">
@@ -70,6 +72,7 @@ const changeStatus = (status: number) => {
                         </UButton>
                     </div>
                 </div>
+                <SelectedSupportMeasures v-model="props.support_measures" />
 
                 <CommentApplications @sendComment="sendComment" :comments="item.comments" />
             </div>
