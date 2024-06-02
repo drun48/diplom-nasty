@@ -2,7 +2,7 @@
 import FormCurator from '~/components/modules/FormCurator.vue'
 import { useAppStore } from '@/store/app.ts'
 const appStore = useAppStore()
-appStore.currentTitle = 'Добавление куратора'
+appStore.currentTitle = 'Редактирование куратора'
 
 const form = ref({})
 </script>

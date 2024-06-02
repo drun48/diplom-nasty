@@ -6,7 +6,7 @@ import BackBtn from '../components/modules/BackBtn.vue'
 import { useAppStore } from '@/store/app.ts'
 import FromUser from '~/components/modules/FormUser.vue'
 const appStore = useAppStore()
-appStore.currentTitle = 'Изменить клиента'
+appStore.currentTitle = 'Редактирование клиента'
 
 const form = ref<User>()
 </script>
