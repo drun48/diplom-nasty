@@ -1,0 +1,56 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import DatePickerTimeRangeDay from '~/components/UI/DatePickerTimeRangeDay.vue'
+import SelectedApplications from '~/components/widget/SelectedApplications.vue'
+import { isEqual } from '~/utils/isEqual'
+import { mapped } from '~/utils/mapped'
+
+const props = defineProps<{
+    modelValue: {}
+}>()
+
+const emit = defineEmits(['update:modelValue'])
+
+const form = ref<{
+    login: string,
+    password: string
+}>({
+    login: '',
+    password: ''
+})
+
+watch(form, () => {
+    emit('update:modelValue', form.value)
+}, { deep: true })
+
+</script>
+
+<template>
+    <form class="flex flex-col items-center gap-10" @submit.prevent="">
+        <div class="flex flex-col gap-4 items-center">
+            <Icon name="iconamoon:3d" size="180"></Icon>
+            <h3>Вход в систему</h3>
+        </div>
+        <div class="flex flex-col gap-4 w-full">
+            <UInput size="sm" color="white" class="w-full" :trailing="false" placeholder="Логин" type="email"
+                v-model="form.login" />
+            <UInput size="sm" color="white" class="w-full" :trailing="false" placeholder="Пароль" type="password"
+                v-model="form.password" />
+        </div>
+        <div class="flex w-full">
+            <UButton class="w-full flex justify-center btn">
+                Вход
+            </UButton>
+        </div>
+    </form>
+</template>
+
+
+<style lang="scss" scoped>
+svg * {
+    stroke: rgba(144, 156, 162, 1);
+}
+.btn{
+    background: rgba(144, 156, 162, 1);
+}
+</style>
