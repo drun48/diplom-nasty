@@ -1,25 +1,10 @@
 <script setup lang="ts">
-import diagrm_ganta from '@/assets/img/diagrm_ganta.svg?raw'
+import { useAppStore } from '~/store/app.ts'
+import { type NavList } from '~/types/Nav.ts'
+const appStore = useAppStore()
 
 const route = useRoute()
-const navigation: Array<{ icon?: string, href: string, image?: string }> = [
-    {
-        icon: 'mdi:account-eye',
-        href: '/users',
-    },
-    {
-        icon: 'solar:calendar-bold',
-        href: '/',
-    },
-    {
-        href: '/diagram',
-        image: diagrm_ganta
-    },
-    {
-        href: '/applications',
-        icon: 'i-material-symbols-approval-delegation-outline'
-    }
-]
+const navigation: NavList = appStore.getNav
 
 </script>
 
@@ -51,12 +36,12 @@ const navigation: Array<{ icon?: string, href: string, image?: string }> = [
     transition: all 0.3s;
 }
 
-.my-icon > * {
+.my-icon>* {
     width: 30px;
     height: auto;
 }
 
-.active .my-icon *{
+.active .my-icon * {
     fill: #FFF;
 }
 </style>
