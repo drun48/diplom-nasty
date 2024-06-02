@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import DatePickerTimeRangeDay from '~/components/UI/DatePickerTimeRangeDay.vue'
-import SelectedApplications from '~/components/widget/SelectedApplications.vue'
-import { isEqual } from '~/utils/isEqual'
-import { mapped } from '~/utils/mapped'
+import { checkEmpty } from '~/utils/checkEmpty.ts'
 
 const props = defineProps<{
     modelValue: {}
 }>()
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'submit'])
 
 const form = ref<{
     login: string,
@@ -23,10 +20,16 @@ watch(form, () => {
     emit('update:modelValue', form.value)
 }, { deep: true })
 
+const submitTest = () => {
+    if (checkEmpty(form.value)) {
+        emit('submit')
+    }
+}
+
 </script>
 
 <template>
-    <form class="flex flex-col items-center gap-10" @submit.prevent="">
+    <form class="flex flex-col items-center gap-10" @submit.prevent="submitTest">
         <div class="flex flex-col gap-4 items-center">
             <Icon name="iconamoon:3d" size="180"></Icon>
             <h3>Вход в систему</h3>
@@ -38,9 +41,11 @@ watch(form, () => {
                 v-model="form.password" />
         </div>
         <div class="flex w-full">
-            <UButton class="w-full flex justify-center btn">
-                Вход
-            </UButton>
+            <button class="w-full">
+                <UButton class="flex justify-center btn w-full">
+                    Вход
+                </UButton>
+            </button>
         </div>
     </form>
 </template>
@@ -50,7 +55,8 @@ watch(form, () => {
 svg * {
     stroke: rgba(144, 156, 162, 1);
 }
-.btn{
+
+.btn {
     background: rgba(144, 156, 162, 1);
 }
 </style>
