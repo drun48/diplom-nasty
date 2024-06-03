@@ -9,10 +9,10 @@ const props = defineProps<{
 const emit = defineEmits(['update:modelValue', 'submit'])
 
 const form = ref<{
-    login: string,
+    email: string,
     password: string
 }>({
-    login: '',
+    email: '',
     password: ''
 })
 
@@ -36,7 +36,7 @@ const submitTest = () => {
         </div>
         <div class="flex flex-col gap-4 w-full">
             <UInput size="sm" color="white" class="w-full" :trailing="false" placeholder="Логин" type="email"
-                v-model="form.login" />
+                v-model="form.email" />
             <UInput size="sm" color="white" class="w-full" :trailing="false" placeholder="Пароль" type="password"
                 v-model="form.password" />
         </div>
