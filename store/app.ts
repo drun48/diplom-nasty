@@ -6,7 +6,7 @@ export const useAppStore = defineStore("app", {
   state: () => ({
     currentTitle: "aaaaaaa",
     email: "aaaaa",
-    role: "admin",
+    role: "curator",
     navCurator: [
       {
         icon: "mdi:account-eye",

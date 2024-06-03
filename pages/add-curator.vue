@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import FormCurator from '~/components/modules/FormCurator.vue'
 import { useAppStore } from '@/store/app.ts'
+import validateRoute from '@/validateRoute/index'
+definePageMeta({
+  validate: validateRoute('admin')
+})
 const appStore = useAppStore()
 appStore.currentTitle = 'Добавление куратора'
 

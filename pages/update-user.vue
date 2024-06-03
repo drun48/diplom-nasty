@@ -5,6 +5,10 @@ import SelectedCategory from '../components/modules/SelectedCategory.vue'
 import BackBtn from '../components/modules/BackBtn.vue'
 import { useAppStore } from '@/store/app.ts'
 import FromUser from '~/components/modules/FormUser.vue'
+import validateRoute from '@/validateRoute/index'
+definePageMeta({
+  validate: validateRoute('curator')
+})
 const appStore = useAppStore()
 appStore.currentTitle = 'Редактирование клиента'
 

@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import EventTable from '~/components/modules/EventTable.vue'
 import { useAppStore } from '@/store/app.ts'
+import validateRoute from '@/validateRoute/index'
+definePageMeta({
+  validate: validateRoute('admin')
+})
 const appStore = useAppStore()
 appStore.currentTitle = 'Мероприятия'
 
