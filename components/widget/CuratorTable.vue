@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useCuratorStore } from '~/store/curator'
+import { getListCurator } from '@/service/curator'
 const curatorStore = useCuratorStore()
-
+getListCurator()
 const columns = [
     {
         key: 'name',
@@ -21,8 +22,8 @@ const columns = [
     },
 ]
 
-const goToCurator = (data:unknown) => {
-    console.log(data)
+const goToCurator = (data: unknown) => {
+    useRouter().push(`update-curator-${data.id}`)
 }
 </script>
 

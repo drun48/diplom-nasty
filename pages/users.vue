@@ -2,8 +2,12 @@
 import { ref } from 'vue';
 import UserTable from '../components/modules/UserTable.vue'
 import SelectedCategory from '../components/modules/SelectedCategory.vue'
-
 import { useAppStore } from '@/store/app.ts'
+import validateRoute from '@/validateRoute/index'
+definePageMeta({
+    validate: validateRoute('CURATOR')
+})
+
 const appStore = useAppStore()
 appStore.currentTitle = 'Клиенты'
 

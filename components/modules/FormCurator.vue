@@ -12,11 +12,14 @@ const props = defineProps<{
         email?: string,
         role?: string,
         phone?: string,
-        districtId: number
+        districtId: number,
+        password?: String
     }
+    label: string,
+    activePassword?: boolean
 }>()
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'submit'])
 
 const defaultObj = {
     first_name: '',
@@ -25,9 +28,13 @@ const defaultObj = {
     email: '',
     role: '',
     phone: '',
-    districtId: -1
+    districtId: -1,
+    password: ''
 }
 
+if (!props.activePassword) {
+    delete defaultObj.password
+}
 const form = ref(defaultObj)
 
 const mappedEvent = () => {
@@ -51,7 +58,7 @@ watch(form, () => {
 
 <template>
     <div class="flex flex-col gap-4">
-        <form class="flex flex-col gap-4" style="max-width: 32rem;" @submit.prevent="">
+        <form class="flex flex-col gap-4" style="max-width: 32rem;" @submit.prevent="emit('submit')">
             <div class="flex w-full gap-2">
                 <UInput size="sm" color="white" class="w-full" :trailing="false" placeholder="Имя"
                     v-model="form.first_name" />
@@ -62,13 +69,22 @@ watch(form, () => {
             </div>
             <div class="flex gap-4">
                 <UInput size="sm" color="white" class="w-full" :trailing="false" placeholder="Почта"
-                    v-model="form.email" />
+                    v-model="form.email" type="email" />
                 <UInput size="sm" color="white" class="w-full" :trailing="false" placeholder="Телефон"
-                    v-model="form.phone" />
+                    v-model="form.phone" type="tel" v-maska data-maska="8 (###) ###-##-##" />
             </div>
             <div class="flex w-full">
                 <SelectedDistrict class="w-full" v-model="form.districtId" />
             </div>
+            <div class="flex w-full">
+                <UInput size="sm" color="white" class="w-full" :trailing="false" placeholder="Придумайте пароль"
+                    v-model="form.password" type="password" v-if="activePassword" />
+            </div>
+            <button class="w-full">
+                <UButton class="flex justify-center btn-form w-full">
+                    {{ label }}
+                </UButton>
+            </button>
         </form>
     </div>
 </template>

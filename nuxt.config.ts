@@ -15,6 +15,8 @@ export default defineNuxtConfig({
     "@/plugins/maska.ts",
     "@/plugins/apollo.ts",
     "@/plugins/diagrama_grant.ts",
+    "@/plugins/auth_apollo.ts",
+    "@/plugins/initApp.ts",
   ],
   postcss: {
     plugins: {
@@ -41,7 +43,7 @@ export default defineNuxtConfig({
   apollo: {
     clients: {
       default: {
-        httpEndpoint: process.env.GRAPHQLPOINT ?? "localhost",
+        httpEndpoint: "https://opora-bac.onrender.com/graphql",
         credentials: "include",
       },
     },

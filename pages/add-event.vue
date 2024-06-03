@@ -3,6 +3,10 @@ import { ref } from 'vue'
 import BackBtn from '../components/modules/BackBtn.vue'
 import { useAppStore } from '@/store/app.ts'
 import FormEvent from '~/components/modules/FormEvent.vue'
+import validateRoute from '@/validateRoute/index'
+definePageMeta({
+  validate: validateRoute('CURATOR')
+})
 const appStore = useAppStore()
 appStore.currentTitle = 'Добавить мероприятие'
 

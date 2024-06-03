@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import CalendarEventTask from '~/components/widget/CalendarEventTask.vue'
+import validateRoute from '@/validateRoute/index'
+definePageMeta({
+  validate: validateRoute('CURATOR')
+})
+
 import { useAppStore } from '@/store/app.ts'
 const appStore = useAppStore()
 appStore.currentTitle = 'Календарь'

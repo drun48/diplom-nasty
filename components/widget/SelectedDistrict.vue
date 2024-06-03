@@ -1,20 +1,15 @@
 <script lang="ts" setup>
-import { useUserStore } from '~/store/user'
-// const storeUser = useUserStore()
+import { GET_DISTRICTS } from '@/query/district/index'
 
 const props = defineProps<{
     modelValue?: number
 }>()
+const { result: listDicstrict } = useQuery(GET_DISTRICTS, { fetchPolicy: 'cache-and-network' })
 const emit = defineEmits(['update:modelValue', 'changeSelected'])
 
 const citizen = computed(() => {
-    return [
-        { id: 1 },
-        { id: 2 },
-        { id: 3 },
-        { id: 4 },
-        { id: 5 },
-    ]
+    if (!listDicstrict.value) return []
+    return listDicstrict.value.getDistricts.map((item: any) => ({ ...item, id: Number(item.id) }))
 })
 
 const selected = ref<number | null>(null)
@@ -28,12 +23,13 @@ watch(props, () => {
 })
 
 watch(selected, () => {
-    emit('update:modelValue', selected)
+    emit('update:modelValue', selected.value)
 })
+
 </script>
 
 <template>
-    <USelectMenu class="w-full" v-model="selected" :options="citizen" value-attribute="id" option-attribute="id"
+    <USelectMenu class="w-full" v-model="selected" :options="citizen" value-attribute="id" option-attribute="name"
         searchable searchable-placeholder="Ввидите" @change="emit('changeSelected')">
     </USelectMenu>
 </template>
