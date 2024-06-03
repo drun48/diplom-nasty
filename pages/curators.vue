@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import CuratorTable from '~/components/modules/CuratorTable.vue'
+import CuratorTable from '@/components/widget/CuratorTable.vue'
 import { useAppStore } from '@/store/app'
 import validateRoute from '@/validateRoute/index'
 definePageMeta({
-  validate: validateRoute('ADMIN')
+    validate: validateRoute('ADMIN')
 })
 const appStore = useAppStore()
 appStore.currentTitle = 'Кураторы'
