@@ -23,7 +23,7 @@ const columns = [
 ]
 
 const goToCurator = (data: unknown) => {
-    console.log(data)
+    useRouter().push(`update-curator-${data.id}`)
 }
 </script>
 

@@ -1,6 +1,6 @@
-export type GET_LIST_CURATORD_DTO = {
+export type GET_LIST_CURATOR_DTO = {
   getCurators: Array<{
-    id: number;
+    id: string;
     first_name: string;
     last_name: string;
     second_name: string;

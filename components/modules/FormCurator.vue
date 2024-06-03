@@ -15,7 +15,8 @@ const props = defineProps<{
         districtId: number,
         password?: String
     }
-    label: string
+    label: string,
+    activePassword?: boolean
 }>()
 
 const emit = defineEmits(['update:modelValue', 'submit'])
@@ -31,6 +32,9 @@ const defaultObj = {
     password: ''
 }
 
+if (!props.activePassword) {
+    delete defaultObj.password
+}
 const form = ref(defaultObj)
 
 const mappedEvent = () => {
@@ -67,14 +71,14 @@ watch(form, () => {
                 <UInput size="sm" color="white" class="w-full" :trailing="false" placeholder="Почта"
                     v-model="form.email" type="email" />
                 <UInput size="sm" color="white" class="w-full" :trailing="false" placeholder="Телефон"
-                    v-model="form.phone" type="tel" v-maska data-maska="8 (###) ###-##-##"/>
+                    v-model="form.phone" type="tel" v-maska data-maska="8 (###) ###-##-##" />
             </div>
             <div class="flex w-full">
                 <SelectedDistrict class="w-full" v-model="form.districtId" />
             </div>
             <div class="flex w-full">
                 <UInput size="sm" color="white" class="w-full" :trailing="false" placeholder="Придумайте пароль"
-                    v-model="form.password" type="password" />
+                    v-model="form.password" type="password" v-if="activePassword" />
             </div>
             <button class="w-full">
                 <UButton class="flex justify-center btn-form w-full">

@@ -24,7 +24,7 @@ const submit = async () => {
 </script>
 
 <template>
-  <FormCurator v-model="form" label="Добавить куратора" @submit="submit" />
+  <FormCurator v-model="form" label="Добавить куратора" @submit="submit" :active-password="true"/>
 </template>
 
 <style lang="scss" scoped></style>

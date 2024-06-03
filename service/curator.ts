@@ -1,9 +1,9 @@
 import { GET_LIST_CURATOR } from "@/query/curators/index";
 import { useCuratorStore } from "@/store/curator";
-import type { GET_LIST_CURATORD_DTO } from "~/query/curators/dto";
+import type { GET_LIST_CURATOR_DTO } from "~/query/curators/dto";
 
 export async function getListCurator() {
-  const { data } = await useAsyncQuery<GET_LIST_CURATORD_DTO>(
+  const { data } = await useAsyncQuery<GET_LIST_CURATOR_DTO>(
     GET_LIST_CURATOR,
     {
       fetchPolicy: "cache-and-network",
