@@ -90,8 +90,8 @@ const listTaskEvent = [
         <Calendar ref="calendar">
             <template v-for="(item, key) in listTaskEvent" v-slot:[item.day] :key="key">
                 <div v-for="(card, index) in item.cards" :key="index">
-                    <CardEvent v-if="card.type === 'Event'" v-bind="card" />
-                    <CardTask v-if="card.type === 'Task'" v-bind="card" />
+                    <CardEvent v-if="card.type === 'Event'" v-bind="card" class="w-full"/>
+                    <CardTask v-if="card.type === 'Task'" v-bind="card" class="w-full"/>
                 </div>
             </template>
         </Calendar>
