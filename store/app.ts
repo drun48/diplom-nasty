@@ -1,12 +1,11 @@
 import { defineStore } from "pinia";
 import diagrm_ganta from "@/assets/img/diagrm_ganta.svg?raw";
 import { type NavList } from "~/types/Nav.ts";
-
 export const useAppStore = defineStore("app", {
   state: () => ({
-    currentTitle: "aaaaaaa",
-    email: "aaaaa",
-    role: "curator",
+    currentTitle: "",
+    email: "",
+    role: "",
     navCurator: [
       {
         icon: "mdi:account-eye",
@@ -40,6 +39,12 @@ export const useAppStore = defineStore("app", {
   getters: {
     getNav: (state): NavList => {
       return state.role == "curator" ? state.navCurator : state.navAdmin;
+    },
+    getRole: (state) => {
+      if (!state.role) {
+        state.role = useCookie("role_user").value;
+      }
+      return state.role;
     },
   },
 });

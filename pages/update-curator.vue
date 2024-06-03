@@ -3,7 +3,7 @@ import FormCurator from '~/components/modules/FormCurator.vue'
 import { useAppStore } from '@/store/app.ts'
 import validateRoute from '@/validateRoute/index'
 definePageMeta({
-  validate: validateRoute('admin')
+  validate: validateRoute('ADMIN')
 })
 const appStore = useAppStore()
 appStore.currentTitle = 'Редактирование куратора'

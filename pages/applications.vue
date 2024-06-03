@@ -3,7 +3,7 @@ import ApplicationsCard from '~/components/widget/ApplicationsCard.vue';
 import { useAppStore } from '@/store/app.ts'
 import validateRoute from '@/validateRoute/index'
 definePageMeta({
-  validate: validateRoute('curator')
+  validate: validateRoute('CURATOR')
 })
 const appStore = useAppStore()
 appStore.currentTitle = 'Обращения'

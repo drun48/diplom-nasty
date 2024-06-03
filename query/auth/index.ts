@@ -3,9 +3,6 @@ export const LOGIN = gql`
     login(input: $data) {
       access_token
       curator {
-        first_name
-        last_name
-        second_name
         role
         email
       }

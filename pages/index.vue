@@ -2,7 +2,7 @@
 import CalendarEventTask from '~/components/widget/CalendarEventTask.vue'
 import validateRoute from '@/validateRoute/index'
 definePageMeta({
-  validate: validateRoute('curator')
+  validate: validateRoute('CURATOR')
 })
 
 import { useAppStore } from '@/store/app.ts'
