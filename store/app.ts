@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import diagrm_ganta from "@/assets/img/diagrm_ganta.svg?raw";
-import { type NavList } from "~/types/Nav.ts";
+import { type NavList } from "@/types/Nav.ts";
 export const useAppStore = defineStore("app", {
   state: () => ({
     currentTitle: "",
@@ -41,9 +41,6 @@ export const useAppStore = defineStore("app", {
       return state.role == "curator" ? state.navCurator : state.navAdmin;
     },
     getRole: (state) => {
-      if (!state.role) {
-        state.role = useCookie("role_user").value;
-      }
       return state.role;
     },
   },
