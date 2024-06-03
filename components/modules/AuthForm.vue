@@ -42,7 +42,7 @@ const submitTest = () => {
         </div>
         <div class="flex w-full">
             <button class="w-full">
-                <UButton class="flex justify-center btn w-full">
+                <UButton class="flex justify-center btn-form w-full">
                     Вход
                 </UButton>
             </button>
@@ -54,9 +54,5 @@ const submitTest = () => {
 <style lang="scss" scoped>
 svg * {
     stroke: rgba(144, 156, 162, 1);
-}
-
-.btn {
-    background: rgba(144, 156, 162, 1);
 }
 </style>
