@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import diagrm_ganta from "@/assets/img/diagrm_ganta.svg?raw";
-import { type NavList } from "@/types/Nav.ts";
+import { type NavList } from "@/types/Nav";
 export const useAppStore = defineStore("app", {
   state: () => ({
     currentTitle: "",

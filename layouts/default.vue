@@ -2,13 +2,18 @@
 import { useAppStore } from '@/store/app.ts'
 import Header from '@/components/UI/header.vue'
 import Nav from '@/components/UI/nav.vue'
+import { logout } from '@/service/auth'
 
 const appStore = useAppStore()
+
+const logoutHeader = () => {
+    logout()
+}
 </script>
 
 <template>
     <div>
-        <Header :title="appStore.currentTitle" :email="appStore.email" class="mb-8"></Header>
+        <Header :title="appStore.currentTitle" :email="appStore.email" class="mb-8" @logout="logoutHeader"></Header>
         <div class="px-20">
             <Nav></Nav>
             <slot />

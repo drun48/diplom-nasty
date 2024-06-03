@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{ title: string, email: string }>()
+const emit = defineEmits(['logout'])
 </script>
 
 <template>
@@ -9,7 +10,7 @@ const props = defineProps<{ title: string, email: string }>()
         </div>
         <div class="flex items-center gap-4">
             <p>{{ email }}</p>
-            <Icon name="mdi:logout" size="20"></Icon>
+            <Icon name="mdi:logout" size="20" @click="emit('logout')" class="cursor-pointer"></Icon>
         </div>
     </header>
 </template>

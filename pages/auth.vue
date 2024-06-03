@@ -1,16 +1,15 @@
 <script setup lang="ts">
-import AuthForm from '~/components/modules/AuthForm.vue'
+import AuthForm from '@/components/modules/AuthForm.vue'
 import { LOGIN } from '@/query/auth/index'
 import type { loginDTO } from '@/query/auth/dto'
 import { useAppStore } from '@/store/app'
-import { writeAuthCookie, readAuthCookie } from '@/service/auth'
+import { login } from '@/service/auth'
 
 definePageMeta({
     layout: false
 })
 
 const appStore = useAppStore()
-const router = useRouter()
 
 const form = ref({})
 
@@ -21,10 +20,7 @@ const auth = async () => {
     const res = await authAction({ data: form.value })
     if (!res.data) return
 
-    writeAuthCookie(res.data.login.access_token, res.data.login.curator.role, res.data.login.curator.email)
-    readAuthCookie()
-
-    router.push('/')
+    login(res.data.login.access_token, res.data.login.curator.role, res.data.login.curator.email)
 }
 </script>
 
