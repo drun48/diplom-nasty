@@ -5,3 +5,13 @@ mutation ADD_EVENT($data:CreateEventInput!){
     }
 }
 `
+
+export const GET_LIST_EVENT = gql`
+query{
+    getEvents{
+        name,
+        description,
+        dateStart,
+        dateEnd
+    }
+}`

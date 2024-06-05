@@ -5,3 +5,14 @@ export const ADD_TASK = gql`
     }
   }
 `;
+
+
+export const GET_LIST_TASK = gql`
+query{
+  getTasks{
+    description,
+    dateStart,
+    dateEnd,
+  }
+}
+`
