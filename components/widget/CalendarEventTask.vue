@@ -15,8 +15,6 @@ const dateNowNextDay = new Date(new Date().setDate(dateNow.getDate() + 1))
 const { result: listEvent } = useQuery(GET_LIST_EVENT, null, { fetchPolicy: 'cache-and-network' })
 const { result: listTask } = useQuery(GET_LIST_TASK, null, { fetchPolicy: 'cache-and-network' })
 
-console.log('asdasdasdas')
-
 const events = computed(() => {
     const list = listEvent?.value?.getEvents.map((item) => ({
         type: 'Event',
