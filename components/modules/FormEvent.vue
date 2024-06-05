@@ -9,12 +9,13 @@ const props = defineProps<{
     modelValue?: {
         name?: string,
         description?: string,
-        selectedUser?: string,
+        selectedUser?: Array<number>,
         date?: Record<string, Date>,
-    }
+    },
+    label: string
 }>()
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'submit'])
 
 const defaultObj = {
     name: '',
@@ -26,7 +27,7 @@ const defaultObj = {
 const form = ref(defaultObj)
 
 const mappedEvent = () => {
-    if(props.modelValue)
+    if (props.modelValue)
         form.value = mapped(form.value, props.modelValue, defaultObj)
 }
 mappedEvent()
@@ -46,7 +47,7 @@ watch(form, () => {
 
 <template>
     <div class="flex flex-col gap-4">
-        <form class="flex flex-col gap-4 max-w-96" @submit.prevent="">
+        <form class="flex flex-col gap-4 max-w-96" @submit.prevent="emit('submit')">
             <div class="flex w-full">
                 <UInput size="sm" color="white" class="w-full" :trailing="false" placeholder="Название мероприятия"
                     v-model="form.name" />
@@ -61,6 +62,11 @@ watch(form, () => {
             <div class="flex w-full">
                 <SelectedCitizenId class="w-full" v-model="form.selectedUser" />
             </div>
+            <button class="w-full">
+                <UButton class="flex justify-center btn-form w-full">
+                    {{ label }}
+                </UButton>
+            </button>
         </form>
     </div>
 </template>

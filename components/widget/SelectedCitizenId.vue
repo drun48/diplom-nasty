@@ -1,14 +1,20 @@
 <script lang="ts" setup>
-import { useUserStore } from '~/store/user'
-const storeUser = useUserStore()
+import { GET_CITIZEN_LIST_NAME } from '@/query/citizen/index'
+import type { ListCitizenName } from '@/query/citizen/dto'
+import nameFormat from "@/utils/nameFormat";
 
 const props = defineProps<{
     modelValue?: Array<number>
 }>()
 const emit = defineEmits(['update:modelValue'])
 
+const { result: listCitizen } = useQuery<{ getCitizens: Array<ListCitizenName> }>(GET_CITIZEN_LIST_NAME, { fetchPolicy: 'cache-and-network' })
+
 const citizen = computed(() => {
-    return storeUser.list
+    return listCitizen.value?.getCitizens.map((item: ListCitizenName) => ({
+        id: Number(item.id),
+        name: nameFormat(item.last_name, item.first_name, item.second_name)
+    }))
 })
 
 const selected = ref<Array<number>>([])
@@ -20,9 +26,9 @@ watch(props, () => {
     if (props.modelValue && props.modelValue !== selected.value)
         selected.value = props.modelValue
 })
-
+ 
 watch(selected, () => {
-    emit('update:modelValue', selected)
+    emit('update:modelValue', selected.value)
 })
 </script>
 
