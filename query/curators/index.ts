@@ -47,11 +47,3 @@ export const GET_CURATOR_ID = gql`
     }
   }
 `;
-
-export const UPDATE_CURATOR = gql`
-  mutation UPDATE_CURATOR($data: UpdateCuratorInput!) {
-    updateCurator(input: $data) {
-      id
-    }
-  }
-`;

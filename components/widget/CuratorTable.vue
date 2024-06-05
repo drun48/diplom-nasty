@@ -21,15 +21,11 @@ const columns = [
         label: 'Район'
     },
 ]
-
-const goToCurator = (data: unknown) => {
-    useRouter().push(`update-curator-${data.id}`)
-}
 </script>
 
 <template>
     <UTable :rows="curatorStore.getList" :columns="columns"
-        :empty-state="{ icon: 'i-heroicons-circle-stack-20-solid', label: 'Нет клиентов' }" @select="goToCurator" />
+        :empty-state="{ icon: 'i-heroicons-circle-stack-20-solid', label: 'Нет клиентов' }" />
 </template>
 
 <style lang="scss" scoped></style>
