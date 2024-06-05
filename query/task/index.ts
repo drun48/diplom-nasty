@@ -6,21 +6,32 @@ export const ADD_TASK = gql`
   }
 `;
 
-
 export const GET_LIST_TASK = gql`
-query{
-  getTasks{
-    id,
-    description,
-    dateStart,
-    dateEnd,
+  query {
+    getTasks {
+      id
+      description
+      dateStart
+      dateEnd
+    }
   }
-}
-`
+`;
+
+export const GET_TASK = gql`
+  query GET_TASK($id: Float!) {
+    getTask(id: $id) {
+      id
+      description
+      dateStart
+      dateEnd
+      activityId
+    }
+  }
+`;
 
 export const UPDATE_TASK = gql`
   mutation UPDATE_TASK($id: Float!, $data: UpdateTaskInput!) {
-    updateEvent(id: $id, updateTask: $data) {
+    updateTask(id: $id, updateTask: $data) {
       id
     }
   }

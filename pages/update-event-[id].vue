@@ -13,10 +13,9 @@ appStore.currentTitle = 'Изменить мероприятие'
 
 const router = useRouter()
 
-const { data } = await useAsyncQuery(GET_EVENT, { id: Number(router.currentRoute.value.params.id) })
+const { data } = await useAsyncQuery(GET_EVENT, { id: Number(router.currentRoute.value.params.id) }, )
 const { mutate: updateEvent } = useMutation(UPDATE_EVENT)
 
-console.log(data)
 const form = ref()
 
 if (data.value) {

@@ -12,11 +12,13 @@ const dateYesterday = new Date(new Date().setDate(dateNow.getDate() - 1))
 const dateNowNextHours = new Date(new Date().setHours(dateNow.getHours() + 1))
 const dateNowNextDay = new Date(new Date().setDate(dateNow.getDate() + 1))
 
-const { result: listEvent } = useQuery(GET_LIST_EVENT, { fetchPolicy: 'cache-and-network' })
-const { result: listTask } = useQuery(GET_LIST_TASK, { fetchPolicy: 'cache-and-network' })
+const { result: listEvent } = useQuery(GET_LIST_EVENT, null, { fetchPolicy: 'cache-and-network' })
+const { result: listTask } = useQuery(GET_LIST_TASK, null, { fetchPolicy: 'cache-and-network' })
+
+console.log('asdasdasdas')
 
 const events = computed(() => {
-    return listEvent?.value?.getEvents.map((item) => ({
+    const list = listEvent?.value?.getEvents.map((item) => ({
         type: 'Event',
         title: item.name,
         dateStart: getDateTimeMinute(new Date(item.dateStart)),
@@ -25,10 +27,11 @@ const events = computed(() => {
         id: item.id,
         discription: item.description
     })) ?? []
+    return [...list]
 })
 
 const tasks = computed(() => {
-    return listTask?.value?.getTasks.map((item) => ({
+    const list = listTask?.value?.getTasks.map((item) => ({
         type: 'Task',
         title: '',
         dateStart: getDateTimeMinute(new Date(item.dateStart)),
@@ -37,6 +40,7 @@ const tasks = computed(() => {
         id: item.id,
         discription: item.description
     })) ?? []
+    return [...list]
 })
 
 const listTaskEvent = computed(() => {
@@ -71,9 +75,9 @@ const goToCard = (type: string, id: number) => {
             <template v-for="(item, key) in listTaskEvent" v-slot:[item.day] :key="key">
                 <div v-for="(card, index) in item.cards" :key="index">
                     <CardEvent v-if="card.type === 'Event'" v-bind="card" class="w-full"
-                        @click="goToCard('Event', card.id)" />
+                        @click="goToCard(card.type, card.id)" />
                     <CardTask v-if="card.type === 'Task'" v-bind="card" class="w-full"
-                        @click="goToCard('Event', card.id)" />
+                        @click="goToCard(card.type, card.id)" />
                 </div>
             </template>
         </Calendar>
