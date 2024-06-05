@@ -1,24 +1,24 @@
 <script lang="ts" setup>
-import { useUserStore } from '~/store/user'
-// const storeUser = useUserStore()
+import { GET_LIST_APPLICATION_ID } from '@/query/application/index'
 
 const props = defineProps<{
-    modelValue?: Array<number>
+    modelValue?: number | null
 }>()
+
 const emit = defineEmits(['update:modelValue'])
 
+const { result } = useQuery<{ getActivitys: Array<{ id: number }> }>(GET_LIST_APPLICATION_ID, { fetchPolicy: 'cache-and-network' })
+
 const citizen = computed(() => {
-    return [
-        { id: 1 },
-        { id: 2 },
-        { id: 3 },
-        { id: 4 },
-        { id: 5 },
-    ]
+    return result.value?.getActivitys.map((item: any) => ({
+        id: Number(item.id),
+        name: `Заявка под номером ${item.id}`
+    }))
 })
 
-const selected = ref<Array<number>>([])
-if (Array.isArray(props.modelValue)) {
+
+const selected = ref<number | null>(null)
+if (typeof props.modelValue === 'number') {
     selected.value = props.modelValue
 }
 
@@ -28,16 +28,13 @@ watch(props, () => {
 })
 
 watch(selected, () => {
-    emit('update:modelValue', selected)
+    emit('update:modelValue', selected.value)
 })
 </script>
 
 <template>
-    <USelectMenu class="w-full" v-model="selected" multiple :options="citizen" value-attribute="id"
-        option-attribute="id" searchable searchable-placeholder="Ввидите">
-        <template #label>
-            <span>Выбрано: {{ selected.length }}</span>
-        </template>
+    <USelectMenu class="w-full" v-model="selected" :options="citizen" value-attribute="id" option-attribute="name"
+        searchable searchable-placeholder="Ввидите">
     </USelectMenu>
 </template>
 
