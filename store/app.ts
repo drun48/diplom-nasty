@@ -38,7 +38,7 @@ export const useAppStore = defineStore("app", {
   actions: {},
   getters: {
     getNav: (state): NavList => {
-      return state.role == "curator" ? state.navCurator : state.navAdmin;
+      return state.role == "CURATOR" ? state.navCurator : state.navAdmin;
     },
     getRole: (state) => {
       return state.role;
