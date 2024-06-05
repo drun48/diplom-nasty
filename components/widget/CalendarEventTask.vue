@@ -31,7 +31,7 @@ const events = computed(() => {
 const tasks = computed(() => {
     const list = listTask?.value?.getTasks.map((item) => ({
         type: 'Task',
-        title: '',
+        title: `Задание №${item.id}`,
         dateStart: getDateTimeMinute(new Date(item.dateStart)),
         dateEnd: getDateTimeMinute(new Date(item.dateEnd)),
         day: item.dateStart,
