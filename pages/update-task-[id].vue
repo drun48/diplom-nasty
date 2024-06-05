@@ -16,7 +16,7 @@ const form = ref()
 <template>
     <div class="flex flex-col gap-4">
         <BackBtn to="/" />
-        <FormTask v-model="form" />
+        <FormTask v-model="form" label="Изменить задачу"/>
     </div>
 </template>
 

@@ -15,80 +15,6 @@ const dateNowNextDay = new Date(new Date().setDate(dateNow.getDate() + 1))
 const { result: listEvent } = useQuery(GET_LIST_EVENT, { fetchPolicy: 'cache-and-network' })
 const { result: listTask } = useQuery(GET_LIST_TASK, { fetchPolicy: 'cache-and-network' })
 
-// const listTaskEvent = [
-//     {
-//         day: formatDateRussianOnlyDate(dateNow),
-//         cards: [
-//             {
-//                 dateStart: getDateTimeMinute(dateNow),
-//                 dateEnd: getDateTimeMinute(dateNow),
-//                 title: 'Название события сегодня прошло',
-//                 discription: 'Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание',
-//                 type: 'Event'
-//             },
-//             {
-//                 dateStart: getDateTimeMinute(dateNow),
-//                 dateEnd: getDateTimeMinute(dateNow),
-//                 title: 'Название задачи сегодня прошло',
-//                 discription: 'Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание',
-//                 type: 'Task'
-//             },
-//             {
-//                 dateStart: getDateTimeMinute(dateNowNextHours),
-//                 dateEnd: getDateTimeMinute(dateNowNextHours),
-//                 title: 'Название события следующий час',
-//                 discription: 'Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание',
-//                 type: 'Event'
-//             },
-//             {
-//                 dateStart: getDateTimeMinute(dateNowNextHours),
-//                 dateEnd: getDateTimeMinute(dateNowNextHours),
-//                 title: 'Название задачи следующий час',
-//                 discription: 'Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание',
-//                 type: 'Task'
-//             }
-//         ]
-//     },
-//     {
-//         day: formatDateRussianOnlyDate(dateYesterday),
-//         cards: [
-//             {
-//                 dateStart: getDateTimeMinute(dateYesterday),
-//                 dateEnd: getDateTimeMinute(dateYesterday),
-//                 title: 'Название события вчера',
-//                 discription: 'Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание',
-//                 type: 'Event'
-//             },
-//             {
-//                 dateStart: getDateTimeMinute(dateYesterday),
-//                 dateEnd: getDateTimeMinute(dateYesterday),
-//                 title: 'Название задачи вчера',
-//                 discription: 'Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание',
-//                 type: 'Task'
-//             },
-//         ]
-//     },
-//     {
-//         day: formatDateRussianOnlyDate(dateNowNextDay),
-//         cards: [
-//             {
-//                 dateStart: getDateTimeMinute(dateNowNextDay),
-//                 dateEnd: getDateTimeMinute(dateNowNextDay),
-//                 title: 'Название события завтра',
-//                 discription: 'Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание',
-//                 type: 'Event'
-//             },
-//             {
-//                 dateStart: getDateTimeMinute(dateNowNextDay),
-//                 dateEnd: getDateTimeMinute(dateNowNextDay),
-//                 title: 'Название задачи завтра',
-//                 discription: 'Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание',
-//                 type: 'Task'
-//             }
-//         ]
-//     },
-// ]
-
 const events = computed(() => {
     return listEvent?.value?.getEvents.map((item) => ({
         type: 'Event',
@@ -125,6 +51,18 @@ const listTaskEvent = computed(() => {
         cards: value
     }))
 })
+
+const router = useRouter()
+const goToCard = (type: string, id: number) => {
+    switch (type) {
+        case 'Event':
+            router.push(`update-event-${id}`)
+            break
+        case 'Task':
+            router.push(`update-task-${id}`)
+            break
+    }
+}
 </script>
 
 <template>
@@ -132,8 +70,10 @@ const listTaskEvent = computed(() => {
         <Calendar ref="calendar">
             <template v-for="(item, key) in listTaskEvent" v-slot:[item.day] :key="key">
                 <div v-for="(card, index) in item.cards" :key="index">
-                    <CardEvent v-if="card.type === 'Event'" v-bind="card" class="w-full" />
-                    <CardTask v-if="card.type === 'Task'" v-bind="card" class="w-full" />
+                    <CardEvent v-if="card.type === 'Event'" v-bind="card" class="w-full"
+                        @click="goToCard('Event', card.id)" />
+                    <CardTask v-if="card.type === 'Task'" v-bind="card" class="w-full"
+                        @click="goToCard('Event', card.id)" />
                 </div>
             </template>
         </Calendar>
