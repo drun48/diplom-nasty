@@ -95,6 +95,10 @@ export function formatDateRussianOnlyDate(date: Date) {
   return dayjs.default(date).format("DD.MM.YYYY");
 }
 
-export function getTime(date:Date){
+export function getTime(date: Date) {
   return dayjs.default(date).format("HH:mm");
+}
+
+export function getDateWithoutTime(date: Date) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
 }

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from "vue"
-import DiagramaGranta from '@/components/modules/DiagramaGranta.vue'
+import DiagramaGranta from '~/components/widget/DiagramaGranta.vue'
 import { useAppStore } from '@/store/app.ts'
 import validateRoute from '@/validateRoute/index'
 definePageMeta({
-  validate: validateRoute('CURATOR')
+    validate: validateRoute('CURATOR')
 })
 const appStore = useAppStore()
 appStore.currentTitle = 'Диаграмма Ганта'
@@ -18,7 +18,7 @@ appStore.currentTitle = 'Диаграмма Ганта'
                 <p>Добавить Задачу</p>
             </nuxt-link>
         </div>
-        <DiagramaGranta></DiagramaGranta>
+        <DiagramaGranta />
     </div>
 </template>
 

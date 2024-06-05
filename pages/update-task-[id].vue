@@ -45,7 +45,7 @@ const submit = async () => {
 
 <template>
   <div class="flex flex-col gap-4">
-    <BackBtn to="/" />
+    <BackBtn  @click="router.back()"/>
     <FormTask v-model="form" label="Изменить задачу" @submit="submit" />
   </div>
 </template>
