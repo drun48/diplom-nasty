@@ -13,6 +13,7 @@ export const GET_LIST_TASK = gql`
       description
       dateStart
       dateEnd
+      activityId
     }
   }
 `;
