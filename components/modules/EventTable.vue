@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useCuratorStore } from '~/store/curator'
-const curatorStore = useCuratorStore()
 
 const columns = [
     {

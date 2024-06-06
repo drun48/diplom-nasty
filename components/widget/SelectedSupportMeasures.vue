@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { useUserStore } from '~/store/user'
-// const storeUser = useUserStore()
 
 const props = defineProps<{
     modelValue?: Array<number>

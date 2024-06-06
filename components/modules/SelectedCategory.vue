@@ -1,18 +1,39 @@
-<script setup lang="ts">
-import { defineEmits } from 'vue'
+<script lang="ts" setup>
+import { GET_LIST_APPLICATION_ID } from '@/query/application/index'
 
-const face = ['ИП', 'ЮР', 'Организация']
-const selectedFace = defineModel()
+const props = defineProps<{
+    modelValue?: string | null
+}>()
+
 const emit = defineEmits(['update:modelValue'])
 
-if(!selectedFace.value){
-    selectedFace.value = face[0]
+const category = [
+    {id:'', name:'Все'},
+    {id:'IP', name:'ИП'},
+    {id:'INDIVIDUAL', name:'физическое лицо'},
+    {id:'ORGANIZATION', name:'организация'},
+]
+
+const selected = ref<string | null>(null)
+if (typeof props.modelValue === 'string') {
+    selected.value = props.modelValue
 }
+
+watch(props, () => {
+    if (props.modelValue && props.modelValue !== selected.value)
+        selected.value = props.modelValue
+})
+
+watch(selected, () => {
+    emit('update:modelValue', selected.value)
+})
 </script>
 
 <template>
-    <UInputMenu v-model="selectedFace" :options="face" />
+    <USelectMenu class="w-full" v-model="selected" :options="category" value-attribute="id" option-attribute="name"
+        searchable searchable-placeholder="Ввидите">
+    </USelectMenu>
 </template>
 
 
-<style lang="scss"></style>
+<style lang="scss" scoped></style>
