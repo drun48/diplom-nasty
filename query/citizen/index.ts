@@ -9,7 +9,7 @@ export const GET_CITIZEN_LIST_NAME = gql`
   }
 `;
 
-export const GET_LIST_CITIZEN= gql`
+export const GET_LIST_CITIZEN = gql`
   query GET_LIST_CITIZEN {
     getCitizens {
       id
@@ -23,4 +23,12 @@ export const GET_LIST_CITIZEN= gql`
       phone
     }
   }
+`;
+
+export const ADD_CITIZEN = gql`
+mutation ADD_CITIZEN($data:CreateCitizenInput!){
+  createCitizen (createCitizenInput:$data){
+    id
+  }
+}
 `;

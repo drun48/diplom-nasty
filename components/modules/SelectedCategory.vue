@@ -2,17 +2,21 @@
 import { GET_LIST_APPLICATION_ID } from '@/query/application/index'
 
 const props = defineProps<{
-    modelValue?: string | null
+    modelValue?: string | null,
+    necessarySelected?: boolean
 }>()
 
 const emit = defineEmits(['update:modelValue'])
 
-const category = [
-    {id:'', name:'Все'},
-    {id:'IP', name:'ИП'},
-    {id:'INDIVIDUAL', name:'физическое лицо'},
-    {id:'ORGANIZATION', name:'организация'},
+let category = [
+    { id: '', name: 'Все' },
+    { id: 'IP', name: 'ИП' },
+    { id: 'INDIVIDUAL', name: 'физическое лицо' },
+    { id: 'ORGANIZATION', name: 'организация' },
 ]
+if(props.necessarySelected){
+    category = category.slice(1, category.length)
+}
 
 const selected = ref<string | null>(null)
 if (typeof props.modelValue === 'string') {
