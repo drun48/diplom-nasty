@@ -2,11 +2,14 @@
 import ApplicationsCard from '~/components/widget/ApplicationsCard.vue';
 import { useAppStore } from '@/store/app.ts'
 import validateRoute from '@/validateRoute/index'
+import { GET_LIST_APPLICATION } from '~/query/application/index';
 definePageMeta({
-  validate: validateRoute('CURATOR')
+    validate: validateRoute('CURATOR')
 })
 const appStore = useAppStore()
 appStore.currentTitle = 'Обращения'
+
+const { result: listApplications } = useQuery(GET_LIST_APPLICATION, { curatorId: appStore.id }, { fetchPolicy: 'cache-and-network' })
 
 const list = ref([
     {

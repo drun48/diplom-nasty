@@ -20,7 +20,7 @@ const auth = async () => {
     const res = await authAction({ data: form.value })
     if (!res.data) return
 
-    login(res.data.login.access_token, res.data.login.curator.role, res.data.login.curator.email)
+    login(res.data.login.access_token, res.data.login.curator.role, res.data.login.curator.email, res.data.login.curator.id)
 }
 </script>
 
