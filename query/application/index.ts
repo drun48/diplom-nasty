@@ -28,3 +28,25 @@ export const GET_LIST_APPLICATION = gql`
     }
   }
 `;
+
+export const CONFIRM_APPLICATIONS = gql`
+  mutation CONFIRM_APPLICATIONS($id: Float!) {
+    confirmActivity(id: $id) {
+      confirm_date
+    }
+  }
+`;
+
+export const UPDATE_APPLICATIONS = gql`
+  mutation UPDATE_APPLICATIONS($id: Float!, $data: UpdateActivityInput!) {
+    updateActivity(id: $id, updateActivity: $data) {
+      id
+      comment
+      end_date
+      supportMeasures {
+        id
+        value
+      }
+    }
+  }
+`;

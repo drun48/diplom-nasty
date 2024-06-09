@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import CommentApplications from '~/components/modules/CommentApplications.vue'
 import SelectedSupportMeasures from '~/components/widget/SelectedSupportMeasures.vue'
+import { CONFIRM_APPLICATIONS, UPDATE_APPLICATIONS } from '~/query/application/index'
 
 const props = defineProps<{
     id: number,
@@ -9,8 +10,16 @@ const props = defineProps<{
     request_date: Date,
     confirm_date?: Date,
     end_date?: Date,
-    support_measures: Array<number>
+    support_measures: Array<number>,
+    open?: boolean
 }>()
+
+const emit = defineEmits<{
+    changeStateOpen: [state: boolean, id: number]
+}>()
+
+const { mutate: confirm } = useMutation(CONFIRM_APPLICATIONS, { refetchQueries: ['GET_LIST_APPLICATION'] })
+const { mutate: update } = useMutation(UPDATE_APPLICATIONS, { refetchQueries: ['GET_LIST_APPLICATION'] })
 
 const card = ref({ ...props })
 
@@ -22,34 +31,65 @@ const cardConfig = computed(() => {
     return [{
         ...card.value,
         slot: 'card-application',
+        defaultOpen: card.value?.open,
     }]
 })
 
 const cardStatusLabel = ['Принять в работу', 'Закрыть заявку', 'Заявка закрыта']
 
 const cardStatus = computed(() => {
-    const status = props.end_date ? 2 : props.confirm_date ? 1 : 0
+    const status = card.value.end_date ? 2 : card.value.confirm_date ? 1 : 0
     return {
         status: status,
         label: cardStatusLabel[status]
     }
 })
 
-const sendComment = (comment: string) => {
-    console.log(comment)
-}
 
 const changeStatus = (status: number) => {
     switch (status) {
         case 0:
+            confirmApplications()
             break
         case 1:
+            endAplication()
             break
     }
 }
 
 const changeSelectedSupport = () => {
     console.log(card.value.support_measures)
+}
+
+const sendComment = (comment: string) => {
+    updateApplications({ comment: [comment] })
+}
+
+const endAplication = () => {
+    updateApplications({ end_date: new Date() })
+}
+
+async function confirmApplications() {
+    const res = await confirm({ id: props.id })
+    if (!res?.data) return
+    const obj = {
+        confirm_date: res?.data.confirmActivity?.confirm_date ? new Date(res?.data.confirmActivity?.confirm_date) : undefined
+    }
+    card.value = Object.assign(card.value, obj)
+    emit('changeStateOpen', false, card.value.id)
+}
+
+async function updateApplications(variable: any) {
+    const res = await update({ id: props.id, data: variable })
+    if (!res?.data) return
+    if (variable.end_date) {
+        emit('changeStateOpen', false, card.value.id)
+    }
+}
+
+const changeStateOpen = () => {
+    card.value.open = !Boolean(card.value.open)
+    emit('changeStateOpen', card.value.open, card.value.id)
 }
 </script>
 
@@ -81,14 +121,14 @@ const changeSelectedSupport = () => {
                     </div>
                 </div>
 
-                <SelectedSupportMeasures v-model="card.support_measures" @changeSelected="changeSelectedSupport"/>
+                <SelectedSupportMeasures v-model="card.support_measures" @changeSelected="changeSelectedSupport" />
 
                 <CommentApplications @sendComment="sendComment" :comments="card.comments" />
             </div>
         </template>
 
         <template #default="{ item, open }">
-            <UButton class="flex text-gray-900 dark:text-white" variant="ghost">
+            <UButton class="flex text-gray-900 dark:text-white" variant="ghost" @click="changeStateOpen">
 
                 <div class="flex flex-auto">
                     <div>

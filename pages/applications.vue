@@ -10,24 +10,27 @@ definePageMeta({
 const appStore = useAppStore()
 appStore.currentTitle = 'Обращения'
 
-const { result: listApplications } = useQuery(GET_LIST_APPLICATION, { curatorId: appStore.id }, { fetchPolicy: 'cache-and-network' })
+const { onResult } = useQuery(GET_LIST_APPLICATION, { curatorId: appStore.id }, { fetchPolicy: 'cache-and-network' })
 
 const list = ref([])
 
-watch(listApplications, () => {
-    if (!listApplications.value) return
-    list.value = listApplications.value.getActivitys.map(item => ({
-        id: Number(item.id),
-        comments: item.comment,
-        support_measures: item.supportMeasures ?? [],
-        request_date: item.request_date ? new Date(item.request_date) : null,
-        confirm_date: item.confirm_date ? new Date(item.confirm_date) : null,
-        end_date: item.end_date ? new Date(item.end_date) : null,
-        citizen: {
-            name: nameFormat(item.citizen.first_name, item.citizen.last_name, item.citizen.second_name),
-            phone: item.citizen.phone
+onResult((listApplications) => {
+    if (!listApplications.data) return
+    list.value = listApplications.data.getActivitys.map(item => {
+        return {
+            id: Number(item.id),
+            comments: item.comment,
+            support_measures: item.supportMeasures ?? [],
+            request_date: item.request_date ? new Date(item.request_date) : null,
+            confirm_date: item.confirm_date ? new Date(item.confirm_date) : null,
+            end_date: item.end_date ? new Date(item.end_date) : null,
+            citizen: {
+                name: nameFormat(item.citizen.first_name, item.citizen.last_name, item.citizen.second_name),
+                phone: item.citizen.phone
+            },
+            open: Boolean(list.value[getIndexApplication(item.id)]?.open)
         }
-    }))
+    }).sort((a, b) => a.id - b.id)
 })
 
 const filter = ref(1)
@@ -46,6 +49,15 @@ const filterStatus = (applications: any): boolean => {
     return false
 }
 
+function getIndexApplication(id: number) {
+    return list.value.findIndex(item => item.id == id)
+}
+
+const changeStateOpen = (state: boolean, id: number) => {
+    const index = getIndexApplication(id)
+    if (index < 0) return
+    list.value[index].open = state
+}
 </script>
 
 <template>
@@ -59,7 +71,7 @@ const filterStatus = (applications: any): boolean => {
             <UButton :class="`${filter === 0 ? 'active' : ''} btn-filter`" @click="filter = 0">Все заявки</UButton>
         </div>
         <div class="flex flex-col" :key="key">
-            <ApplicationsCard v-for="(item, key) in filterList" :key="key" v-bind="item" />
+            <ApplicationsCard v-for="(item, key) in filterList" :key="key" v-bind="item" @changeStateOpen="changeStateOpen" />
         </div>
     </div>
 </template>
