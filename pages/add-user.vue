@@ -23,11 +23,21 @@ const submit = async () => {
         last_name: form.value.last_name,
         second_name: form.value.second_name,
         email: form.value.email,
-        phone: form.value.phone,
+        phone: form.value.phone?.replaceAll(' ', '').replaceAll('-', '').replace('(', '').replace(')', ''),
         category: form.value.category,
         organizationName: form.value.organizationName,
+        curatorId: appStore.id,
+        inn:form.value.inn
     }
-    await addCitizen(variable)
+
+    if (!variable.organizationName) {
+        delete variable.organizationName
+    }
+
+    const res = await addCitizen({ data: variable })
+    if (res.data) {
+        useRouter().push('/users')
+    }
 }
 </script>
 

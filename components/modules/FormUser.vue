@@ -47,11 +47,13 @@ watch(form, () => {
     <form class="flex flex-col gap-4" @submit.prevent="emit('submit')" style="max-width: 600px;">
         <div class="flex gap-4">
             <UInput size="sm" color="white" :trailing="false" placeholder="Почта" v-model="form.email" />
+            <UInput size="sm" color="white" class="w-full" :trailing="false" placeholder="Телефон" v-model="form.phone"
+                type="tel" v-maska data-maska="8 (###) ###-##-##" />
         </div>
         <div class="flex gap-4">
-            <SelectedCategory v-model="form.category" :necessarySelected="true"/>
+            <SelectedCategory v-model="form.category" :necessarySelected="true" />
             <UInput size="sm" color="white" :trailing="false" placeholder="ИНН" v-model="form.inn" />
-            <UInput v-if="form.category == 'Организация'" size="sm" color="white" :trailing="false"
+            <UInput v-if="form.category == 'ORGANIZATION'" size="sm" color="white" :trailing="false"
                 placeholder="Название организации" v-model="form.organizationName" />
         </div>
         <div class="flex gap-4">
