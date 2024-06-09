@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import EventTable from '~/components/modules/EventTable.vue'
+import EventTable from '~/components/widget/EventTable.vue'
 import { useAppStore } from '@/store/app.ts'
 import validateRoute from '@/validateRoute/index'
 definePageMeta({
