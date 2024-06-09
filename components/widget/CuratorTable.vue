@@ -19,7 +19,10 @@ const columns = [
     }, {
         key: 'district',
         label: 'Район'
-    },
+    },{
+        key:'rating',
+        label:'Рейтинг'
+    }
 ]
 </script>
 

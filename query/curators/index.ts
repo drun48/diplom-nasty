@@ -13,6 +13,7 @@ export const GET_LIST_CURATOR = gql`
       first_name
       last_name
       second_name
+      rating
       email
       phone
       role
@@ -46,10 +47,4 @@ export const GET_CURATOR_ID = gql`
       }
     }
   }
-`;
-
-export const GET_RAITING = gql`
-query GET_RAITING($id:String!){
-  getRating(id:$id)
-}
 `;
