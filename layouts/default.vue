@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useAppStore } from '@/store/app.ts'
-import Header from '@/components/UI/header.vue'
+import Header from '~/components/widget/header.vue'
 import Nav from '@/components/UI/nav.vue'
 import { logout } from '@/service/auth'
 
