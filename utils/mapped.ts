@@ -24,7 +24,7 @@ export function mapped<T extends Indexed = Indexed>(
       a_copy[key] = mapped(a[key], b[key], defaultValue[key]);
     } else if (a[key] !== b[key] && b[key]) {
       a_copy[key] = b[key];
-    } else {
+    } else if(a[key] !== b[key]) {
       a_copy[key] = defaultValue[key];
     }
   }

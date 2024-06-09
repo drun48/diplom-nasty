@@ -13,23 +13,24 @@ appStore.currentTitle = 'Изменить мероприятие'
 
 const router = useRouter()
 
-const { data } = await useAsyncQuery(GET_EVENT, { id: Number(router.currentRoute.value.params.id) }, )
+const { onResult } = useQuery(GET_EVENT, { id: Number(router.currentRoute.value.params.id) }, { fetchPolicy: 'cache-and-network' })
 const { mutate: updateEvent } = useMutation(UPDATE_EVENT)
 
 const form = ref()
 
-if (data.value) {
+onResult((result) => {
+  if (!result.data) return
   form.value = {
-    id: data.value.getEvent.id,
-    name: data.value.getEvent.name,
-    description: data.value.getEvent.description,
+    id: result.data.getEvent.id,
+    name: result.data.getEvent.name,
+    description: result.data.getEvent.description,
     date: {
-      start: new Date(data.value.getEvent.dateStart),
-      end: new Date(data.value.getEvent.dateEnd),
+      start: new Date(result.data.getEvent.dateStart),
+      end: new Date(result.data.getEvent.dateEnd),
     },
-    selectedUser: data.value.getEvent.citizenOnEvent.map(item => Number(item.citizenId))
+    selectedUser: result.data.getEvent.citizenOnEvent.map(item => Number(item.citizenId))
   }
-}
+})
 
 const submit = async () => {
   const variable = {

@@ -16,13 +16,15 @@ const appStore = useAppStore()
 appStore.currentTitle = 'Редактирование клиента'
 
 const router = useRouter()
-const { data } = await useAsyncQuery(GET_CITIZEN, { id: Number(router.currentRoute.value.params.id) })
+const { onResult } = useQuery(GET_CITIZEN, { id: Number(router.currentRoute.value.params.id) }, { fetchPolicy: 'cache-and-network' })
 const { mutate: updateCitizen } = useMutation(UPDATE_CITIZEN)
 
 const form = ref<User>()
-if (data.value) {
-    form.value = data.value.getCitizen
-}
+
+onResult((result) => {
+    if (!result.data) return
+    form.value = result.data.getCitizen
+})
 
 const submit = async () => {
     const variable = {

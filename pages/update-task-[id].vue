@@ -13,22 +13,25 @@ const appStore = useAppStore()
 appStore.currentTitle = 'Изменить задачу'
 
 const router = useRouter()
-const { data } = await useAsyncQuery(GET_TASK, { id: Number(router.currentRoute.value.params.id) })
+const { onResult } = useQuery(GET_TASK, { id: Number(router.currentRoute.value.params.id) }, { fetchPolicy: 'cache-and-network' })
 const { mutate: updateTask } = useMutation(UPDATE_TASK)
 
 const form = ref()
 
-if (data.value) {
+onResult((result) => {
+  if (!result.data) return
   form.value = {
-    id: data.value.getTask.id,
-    description: data.value.getTask.description,
-    selectedApplication: data.value.getTask.activityId,
+    id: result.data.getTask.id,
+    description: result.data.getTask.description,
+    selectedApplication: result.data.getTask.activityId,
     date: {
-      start: data.value.getTask.dateStart,
-      end: data.value.getTask.dateEnd,
+      start: result.data.getTask.dateStart,
+      end: result.data.getTask.dateEnd,
     },
   }
-}
+})
+
+
 
 const submit = async () => {
   const variable = {
@@ -45,7 +48,7 @@ const submit = async () => {
 
 <template>
   <div class="flex flex-col gap-4">
-    <BackBtn  @click="router.back()"/>
+    <BackBtn @click="router.back()" />
     <FormTask v-model="form" label="Изменить задачу" @submit="submit" />
   </div>
 </template>

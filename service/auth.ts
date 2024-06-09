@@ -47,7 +47,6 @@ export function readAuthCookie() {
 }
 
 function getCookieAuth() {
-  console.log(useCookie("role_user").value)
   return {
     access_token_cookie: useCookie("access_token"),
     role_user: useCookie("role_user"),
