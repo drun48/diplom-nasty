@@ -36,7 +36,7 @@ const columns = [
 const { result: listUser } = useQuery(GET_LIST_CITIZEN, { curatorId: appStore.id }, { fetchPolicy: 'cache-and-network' })
 
 const goToUser = (data: unknown) => {
-    console.log(data)
+    useRouter().push(`/update-user-${data.id}`)
 }
 
 const listCitize = computed(() => {
@@ -47,6 +47,7 @@ const listCitize = computed(() => {
         inn: item.inn,
         category: item.category,
         organizationName: item.organizationName,
+        id:item.id
     })) ?? []
 })
 
