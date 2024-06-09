@@ -5,14 +5,17 @@ import CardEvent from '~/components/modules/CardEvent.vue';
 import CardTask from '~/components/modules/CardTask.vue';
 import { GET_LIST_EVENT } from '@/query/event/index'
 import { GET_LIST_TASK } from '@/query/task/index'
+import { useAppStore } from '@/store/app'
 const calendar = ref()
+
+const appStore = useAppStore()
 
 const dateNow = new Date()
 const dateYesterday = new Date(new Date().setDate(dateNow.getDate() - 1))
 const dateNowNextHours = new Date(new Date().setHours(dateNow.getHours() + 1))
 const dateNowNextDay = new Date(new Date().setDate(dateNow.getDate() + 1))
 
-const { result: listEvent } = useQuery(GET_LIST_EVENT, null, { fetchPolicy: 'cache-and-network' })
+const { result: listEvent } = useQuery(GET_LIST_EVENT, { curatorId: appStore.id }, { fetchPolicy: 'cache-and-network' })
 const { result: listTask } = useQuery(GET_LIST_TASK, null, { fetchPolicy: 'cache-and-network' })
 
 const events = computed(() => {

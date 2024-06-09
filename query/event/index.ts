@@ -7,8 +7,8 @@ export const ADD_EVENT = gql`
 `;
 
 export const GET_LIST_EVENT = gql`
-  query {
-    getEvents {
+  query GET_LIST_EVENT($curatorId: String) {
+    getEvents(curatorId: $curatorId) {
       id
       name
       description
