@@ -50,6 +50,6 @@ export const GET_CURATOR_ID = gql`
 
 export const GET_RAITING = gql`
 query GET_RAITING($id:String!){
-  getRating id($id)
+  getRating(id:$id)
 }
 `;
