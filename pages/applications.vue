@@ -3,6 +3,7 @@ import ApplicationsCard from '~/components/widget/ApplicationsCard.vue';
 import { useAppStore } from '@/store/app.ts'
 import validateRoute from '@/validateRoute/index'
 import { GET_LIST_APPLICATION } from '~/query/application/index';
+import nameFormat from "@/utils/nameFormat";
 definePageMeta({
     validate: validateRoute('CURATOR')
 })
@@ -11,41 +12,23 @@ appStore.currentTitle = 'Обращения'
 
 const { result: listApplications } = useQuery(GET_LIST_APPLICATION, { curatorId: appStore.id }, { fetchPolicy: 'cache-and-network' })
 
-const list = ref([
-    {
-        id: 1,
+const list = ref([])
+
+watch(listApplications, () => {
+    if (!listApplications.value) return
+    list.value = listApplications.value.getActivitys.map(item => ({
+        id: Number(item.id),
+        comments: item.comment,
+        support_measures: item.supportMeasures ?? [],
+        request_date: item.request_date ? new Date(item.request_date) : null,
+        confirm_date: item.confirm_date ? new Date(item.confirm_date) : null,
+        end_date: item.end_date ? new Date(item.end_date) : null,
         citizen: {
-            name: 'Иванов1 Иван Иваныч',
-            phone: '89006008913'
-        },
-        comments: ['Текст сообщение', 'Текст сообщение', 'Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание'],
-        support_measures: [1, 2],
-        request_date: new Date()
-    },
-    {
-        id: 2,
-        citizen: {
-            name: 'Иванов2 Иван Иваныч',
-            phone: '89006008913'
-        },
-        comments: ['Текст сообщение', 'Текст сообщение', 'Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание'],
-        support_measures: [1, 2, 3],
-        request_date: new Date(),
-        confirm_date: new Date()
-    },
-    {
-        id: 3,
-        citizen: {
-            name: 'Иванов3 Иван Иваныч',
-            phone: '89006008913'
-        },
-        comments: ['Текст сообщение', 'Текст сообщение', 'Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание Описание задачи очень очень ОЧЕНЬ большое описание'],
-        support_measures: [1],
-        request_date: new Date(),
-        confirm_date: new Date(),
-        end_date: new Date()
-    }
-])
+            name: nameFormat(item.citizen.first_name, item.citizen.last_name, item.citizen.second_name),
+            phone: item.citizen.phone
+        }
+    }))
+})
 
 const filter = ref(1)
 const key = ref(Math.random())

@@ -15,6 +15,12 @@ export const GET_LIST_APPLICATION = gql`
       confirm_date
       end_date
       reaction
+      citizen {
+        first_name
+        last_name
+        second_name
+        phone
+      }
       supportMeasures {
         id
         value
