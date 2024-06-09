@@ -2,13 +2,17 @@
 import { GET_CITIZEN_LIST_NAME } from '@/query/citizen/index'
 import type { ListCitizenName } from '@/query/citizen/dto'
 import nameFormat from "@/utils/nameFormat";
+import { useAppStore } from '@/store/app'
 
 const props = defineProps<{
     modelValue?: Array<number>
 }>()
+
+const appStore = useAppStore()
+
 const emit = defineEmits(['update:modelValue'])
 
-const { result: listCitizen } = useQuery<{ getCitizens: Array<ListCitizenName> }>(GET_CITIZEN_LIST_NAME, { fetchPolicy: 'cache-and-network' })
+const { result: listCitizen } = useQuery<{ getCitizens: Array<ListCitizenName> }>(GET_CITIZEN_LIST_NAME, { curatorId: appStore.id }, { fetchPolicy: 'cache-and-network' })
 
 const citizen = computed(() => {
     return listCitizen.value?.getCitizens.map((item: ListCitizenName) => ({
@@ -26,7 +30,7 @@ watch(props, () => {
     if (props.modelValue && props.modelValue !== selected.value)
         selected.value = props.modelValue
 })
- 
+
 watch(selected, () => {
     emit('update:modelValue', selected.value)
 })

@@ -1,6 +1,6 @@
 export const GET_CITIZEN_LIST_NAME = gql`
-  query GET_CITIZEN_LIST_NAME {
-    getCitizens {
+  query GET_CITIZEN_LIST_NAME($curatorId: String) {
+    getCitizens(curatorId: $curatorId) {
       id
       first_name
       last_name
@@ -10,8 +10,8 @@ export const GET_CITIZEN_LIST_NAME = gql`
 `;
 
 export const GET_LIST_CITIZEN = gql`
-  query GET_LIST_CITIZEN {
-    getCitizens {
+  query GET_LIST_CITIZEN($curatorId: String) {
+    getCitizens(curatorId: $curatorId) {
       id
       first_name
       last_name
@@ -26,9 +26,9 @@ export const GET_LIST_CITIZEN = gql`
 `;
 
 export const ADD_CITIZEN = gql`
-mutation ADD_CITIZEN($data:CreateCitizenInput!){
-  createCitizen (createCitizenInput:$data){
-    id
+  mutation ADD_CITIZEN($data: CreateCitizenInput!) {
+    createCitizen(createCitizenInput: $data) {
+      id
+    }
   }
-}
 `;

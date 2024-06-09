@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { GET_LIST_CITIZEN } from '@/query/citizen/index'
 import nameFormat from '@/utils/nameFormat'
+import { useAppStore } from '@/store/app'
 
 const props = defineProps<{
     filterInn?: string,
     filterCategory?: string,
     filterName?: string
 }>()
+
+const appStore = useAppStore()
 
 const columns = [
     {
@@ -30,7 +33,7 @@ const columns = [
     },
 ]
 
-const { result: listUser } = useQuery(GET_LIST_CITIZEN)
+const { result: listUser } = useQuery(GET_LIST_CITIZEN, { curatorId: appStore.id }, { fetchPolicy: 'cache-and-network' })
 
 const goToUser = (data: unknown) => {
     console.log(data)
