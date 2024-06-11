@@ -10,7 +10,7 @@ const props = defineProps<{
     request_date: Date,
     confirm_date?: Date,
     end_date?: Date,
-    support_measures: Array<number>,
+    support_measures: number,
     open?: boolean
 }>()
 
@@ -58,7 +58,7 @@ const changeStatus = (status: number) => {
 }
 
 const changeSelectedSupport = () => {
-    console.log(card.value.support_measures)
+    updateApplications({support_measureId:card.value.support_measures})
 }
 
 const sendComment = (comment: string) => {
@@ -120,7 +120,7 @@ const changeStateOpen = () => {
                         </UButton>
                     </div>
                 </div>
-
+                
                 <SelectedSupportMeasures v-model="card.support_measures" @changeSelected="changeSelectedSupport" />
 
                 <CommentApplications @sendComment="sendComment" :comments="card.comments" />

@@ -20,7 +20,7 @@ onResult((listApplications) => {
         return {
             id: Number(item.id),
             comments: item.comment,
-            support_measures: item.supportMeasures ?? [],
+            support_measures: item.supportMeasures?.id ? Number(item.supportMeasures?.id) : -1,
             request_date: item.request_date ? new Date(item.request_date) : null,
             confirm_date: item.confirm_date ? new Date(item.confirm_date) : null,
             end_date: item.end_date ? new Date(item.end_date) : null,
@@ -71,7 +71,8 @@ const changeStateOpen = (state: boolean, id: number) => {
             <UButton :class="`${filter === 0 ? 'active' : ''} btn-filter`" @click="filter = 0">Все заявки</UButton>
         </div>
         <div class="flex flex-col" :key="key">
-            <ApplicationsCard v-for="(item, key) in filterList" :key="key" v-bind="item" @changeStateOpen="changeStateOpen" />
+            <ApplicationsCard v-for="(item, key) in filterList" :key="key" v-bind="item"
+                @changeStateOpen="changeStateOpen" />
         </div>
     </div>
 </template>
