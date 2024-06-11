@@ -29,7 +29,7 @@ const columns = [
 
 <template>
     <UTable :rows="curatorStore.getList" :columns="columns"
-        :empty-state="{ icon: 'i-heroicons-circle-stack-20-solid', label: 'Нет клиентов' }">
+        :empty-state="{ icon: 'i-heroicons-circle-stack-20-solid', label: 'Нет кураторов' }">
         <template #rating-data="{ row }">
             <Rating :rating="row.rating" />
         </template>

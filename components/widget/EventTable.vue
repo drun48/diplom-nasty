@@ -29,7 +29,7 @@ const events = computed(() => {
 
 <template>
     <UTable :rows="events" :columns="columns"
-        :empty-state="{ icon: 'i-heroicons-circle-stack-20-solid', label: 'Нет клиентов' }" />
+        :empty-state="{ icon: 'i-heroicons-circle-stack-20-solid', label: 'Нет мероприятий' }" />
 </template>
 
 <style lang="scss" scoped></style>

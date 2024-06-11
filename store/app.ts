@@ -34,6 +34,10 @@ export const useAppStore = defineStore("app", {
         href: "/event",
         icon: "solar:calendar-bold",
       },
+      {
+        href:"/support-measures",
+        icon:"i-mdi-account-question"
+      }
     ],
   }),
   actions: {},
